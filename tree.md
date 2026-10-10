@@ -71,6 +71,8 @@
 │   │   │   ├── dsc06837.jpg
 │   │   │   ├── dsc06966.jpg
 │   │   │   └── dsc07004.jpg
+│   │   ├── me/
+│   │   │   └── me.jpeg
 │   │   └── travel/
 │   │       ├── japan-1.jpg
 │   │       ├── japan-2.jpg
