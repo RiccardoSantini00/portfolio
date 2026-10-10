@@ -1,0 +1,9 @@
+# Original media (~1.9 GB, files up to 176 MB): too large for GitHub.
+# The site uses the web-optimized copies in assets/ instead.
+01_Showreel & Curriculum/
+02_Videos/
+03_Photos/
+
+# Local tooling output
+.playwright-mcp/
+__pycache__/

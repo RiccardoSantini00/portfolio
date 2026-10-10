@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Social media — Riccardo Santini</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;background:#16181b;color:#ece9e2;font-family:Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#ece9e2;text-decoration:none}a:hover{color:#4ecdc0}
+@keyframes rise{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+</style>
+</helmet>
+<div style="background:#16181b;color:#ece9e2;min-height:100vh;overflow-x:clip">
+<nav style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:18px 32px;background:linear-gradient(180deg,rgba(22,24,27,.85),rgba(22,24,27,0));backdrop-filter:blur(6px)">
+  <a href="Home.dc.html" style="font-family:Syne,sans-serif;font-weight:800;font-size:15px;letter-spacing:.12em;text-transform:uppercase">RS</a>
+  <div style="display:flex;gap:28px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:500;white-space:nowrap">
+    <a href="Home.dc.html#servizi" style="color:rgba(236,233,226,.75);transition:color .3s" style-hover="color:#4ecdc0">← Servizi</a>
+    <a href="mailto:riccardo.santini@email.it" style="color:rgba(236,233,226,.75);transition:color .3s" style-hover="color:#4ecdc0">Contatti</a>
+  </div>
+</nav>
+
+<header data-screen-label="Social hero" style="padding:160px 32px 20px;max-width:1400px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;gap:28px 64px;align-items:end;animation:rise 1s cubic-bezier(.2,.7,.2,1) both">
+  <div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:#4ecdc0;margin-bottom:20px">Contenuti</div>
+    <h1 style="margin:0;font-family:Syne,sans-serif;font-weight:800;font-size:clamp(48px,9vw,140px);line-height:.9;letter-spacing:-.04em;text-transform:uppercase">Social<br>media</h1>
+  </div>
+  <p style="margin:0;flex:1 1 320px;font-size:17px;line-height:1.6;opacity:.75;max-width:40ch">Contenuti, reel e gestione dei canali. Trascina la giostra o muovi il mouse per sfogliare i formati.</p>
+</header>
+
+<section data-screen-label="Giostra 3D" ref="{{ stageRef }}" onPointerDown="{{ onDown }}" onPointerMove="{{ onMove }}" onPointerUp="{{ onUp }}" onPointerCancel="{{ onUp }}" style="position:relative;height:720px;display:grid;place-items:center;perspective:1400px;overflow:hidden;cursor:grab;user-select:none;touch-action:pan-y">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 50% 40% at 50% 60%,rgba(236,233,226,.06),rgba(22,24,27,0) 70%);pointer-events:none"></div>
+  <div style="position:relative;width:0;height:0;transform-style:preserve-3d;transform:rotateY({{ rot }}deg);transition:{{ tr }}">
+    <sc-for list="{{ cards }}" as="c" hint-placeholder-count="8">
+      <div style="position:absolute;left:-120px;top:-250px;width:240px;height:500px;border-radius:28px;border:1px solid rgba(236,233,226,.2);background:#1f2226;transform:{{ c.tf }};backface-visibility:hidden;overflow:hidden;box-shadow:0 30px 80px -30px rgba(0,0,0,.8);display:flex;flex-direction:column">
+        <div style="height:30px;display:flex;justify-content:center;align-items:end;padding-bottom:4px"><span style="width:70px;height:6px;border-radius:999px;background:#2c3136"></span></div>
+        <div style="flex:1;margin:8px;border-radius:18px;position:relative;overflow:hidden;background:repeating-linear-gradient(135deg,#272b30 0 12px,#20242a 12px 24px)">
+          <video data-auto="" src="{{ c.src }}" data-poster="{{ c.poster }}" preload="none" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;pointer-events:none"></video>
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,24,27,.45) 0%,rgba(22,24,27,0) 22%,rgba(22,24,27,0) 65%,rgba(22,24,27,.75) 100%);pointer-events:none"></div>
+          <span style="position:absolute;left:14px;top:12px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;opacity:.85">{{ c.kind }}</span>
+          <span style="position:absolute;left:14px;right:14px;bottom:14px;font-family:Syne,sans-serif;font-weight:700;font-size:15px;line-height:1.1">{{ c.title }}</span>
+        </div>
+        <div style="height:46px;display:flex;justify-content:space-between;align-items:center;padding:0 20px;font-family:'JetBrains Mono',monospace;font-size:10px;opacity:.55"><span>{{ c.brand }}</span><span>{{ c.stat }}</span></div>
+      </div>
+    </sc-for>
+  </div>
+  <div style="position:absolute;bottom:28px;left:0;right:0;display:flex;justify-content:center;gap:14px">
+    <button onClick="{{ prev }}" style="width:48px;height:48px;border-radius:999px;border:1px solid rgba(236,233,226,.3);background:transparent;color:#ece9e2;font-size:18px;cursor:pointer;transition:background .3s,color .3s" style-hover="background:#4ecdc0;color:#16181b;border-color:#4ecdc0">←</button>
+    <button onClick="{{ next }}" style="width:48px;height:48px;border-radius:999px;border:1px solid rgba(236,233,226,.3);background:transparent;color:#ece9e2;font-size:18px;cursor:pointer;transition:background .3s,color .3s" style-hover="background:#4ecdc0;color:#16181b;border-color:#4ecdc0">→</button>
+  </div>
+</section>
+
+<section data-screen-label="Cosa faccio" style="max-width:1400px;margin:0 auto;padding:100px 32px 160px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:rgba(236,233,226,.12);border:1px solid rgba(236,233,226,.12)">
+  <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
+    <div style="background:#16181b;padding:36px 28px;display:flex;flex-direction:column;gap:16px;transition:background .4s" style-hover="background:#1f2226">
+      <span style="font-family:Syne,sans-serif;font-weight:800;font-size:24px;letter-spacing:-.02em;text-transform:uppercase;color:#4ecdc0">{{ s.title }}</span>
+      <p style="margin:0;font-size:14px;line-height:1.55;opacity:.7">{{ s.desc }}</p>
+    </div>
+  </sc-for>
+</section>
+
+<footer style="padding:60px 32px;border-top:1px solid rgba(236,233,226,.12);display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;max-width:1400px;margin:0 auto;font-size:14px;opacity:.7">
+  <a href="Home.dc.html#servizi">← Tutti i servizi</a>
+  <a href="mailto:riccardo.santini@email.it?subject=Social%20media">Richiedi un preventivo →</a>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state={rot:0,drag:false,hover:0};
+  constructor(p){super(p);this.stageRef=React.createRef();}
+  componentDidMount(){
+    this.tick=()=>{ if(!this.state.drag){ this.setState(s=>({rot:s.rot+0.06+s.hover})); } this.raf=requestAnimationFrame(this.tick); };
+    this.raf=requestAnimationFrame(this.tick);
+    this.wireVideos();
+  }
+  // Muted looping previews: play only while on screen, pause otherwise.
+  wireVideos(){
+    this.io=new IntersectionObserver(es=>es.forEach(e=>{ const v=e.target;
+      if(e.isIntersecting){ v.preload='auto'; v.play().catch(()=>{}); } else v.pause(); }),{threshold:.1});
+    document.querySelectorAll('video[data-auto]').forEach(v=>{ if(v.dataset.poster) v.poster=v.dataset.poster; v.muted=true; v.loop=true; v.playsInline=true; this.io.observe(v); });
+  }
+  componentWillUnmount(){cancelAnimationFrame(this.raf); this.io&&this.io.disconnect();}
+  renderVals(){
+    const vid=n=>({src:'assets/videos/'+n+'.mp4',poster:'assets/posters/'+n+'.jpg'});
+    const data=[
+      {kind:'reel · 9:16',title:'Carica il tuo video',brand:'blinkoo',stat:'00:13',...vid('reel-uploads')},
+      {kind:'reel · 9:16',title:'Siena in 5 tappe',brand:'travel',stat:'00:25',...vid('reel-5siena')},
+      {kind:'post · 4:5',title:'AI Conf 2026 — teaser',brand:'ai conf',stat:'00:28',...vid('reelanticipazione-aiconf2026')},
+      {kind:'reel · 9:16',title:'Antica Bottega',brand:'ristorante',stat:'00:40',...vid('reel-anticabottega')},
+      {kind:'reel · 9:16',title:'Budapest',brand:'travel',stat:'00:34',...vid('reel-budapest')},
+      {kind:'reel · 9:16',title:'TheFork Awards',brand:'evento',stat:'00:44',...vid('reel-theforkawards')},
+      {kind:'reel · 9:16',title:'Milano gratis',brand:'city guide',stat:'00:31',...vid('reel-milanogratis')},
+      {kind:'reel · 9:16',title:'AI Conf 2026 — live',brand:'ai conf',stat:'00:56',...vid('ai-conf-reel')}
+    ];
+    const n=data.length, R=520, step=360/n;
+    const cards=data.map((c,i)=>({...c,tf:'rotateY('+(i*step)+'deg) translateZ('+R+'px)'}));
+    const steps=[
+      {title:'Strategia',desc:'Analisi del canale, obiettivi, piano editoriale mensile.'},
+      {title:'Produzione',desc:'Shooting foto e video pensati per ogni formato.'},
+      {title:'Pubblicazione',desc:'Copy, hashtag, calendario e gestione community.'},
+      {title:'Report',desc:'Metriche chiare ogni mese e ottimizzazione continua.'}
+    ];
+    return {stageRef:this.stageRef,cards,steps,rot:this.state.rot.toFixed(2),tr:this.state.drag?'none':'transform .08s linear',
+      onDown:e=>{e.currentTarget.setPointerCapture(e.pointerId);this.sx=e.clientX;this.sr=this.state.rot;this.setState({drag:true});},
+      onMove:e=>{ if(this.state.drag){ this.setState({rot:this.sr+(e.clientX-this.sx)*.35}); } else { const r=this.stageRef.current.getBoundingClientRect(); const x=(e.clientX-r.left)/r.width-.5; this.setState({hover:Math.abs(x)>.3?x*1.2:0}); } },
+      onUp:()=>this.setState({drag:false,hover:0}),
+      prev:()=>this.setState(s=>({rot:s.rot-step})), next:()=>this.setState(s=>({rot:s.rot+step}))};
+  }
+}
+</script>
+</body>
+</html>

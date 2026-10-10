@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Video editing — Riccardo Santini</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;background:#16181b;color:#ece9e2;font-family:Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#ece9e2;text-decoration:none}a:hover{color:#4ecdc0}
+@keyframes rise{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+</style>
+</helmet>
+<div style="background:#16181b;color:#ece9e2;min-height:100vh;overflow-x:clip">
+<nav style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:18px 32px;background:linear-gradient(180deg,rgba(22,24,27,.85),rgba(22,24,27,0));backdrop-filter:blur(6px)">
+  <a href="Home.dc.html" style="font-family:Syne,sans-serif;font-weight:800;font-size:15px;letter-spacing:.12em;text-transform:uppercase">RS</a>
+  <div style="display:flex;gap:28px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:500;white-space:nowrap">
+    <a href="Home.dc.html#servizi" style="color:rgba(236,233,226,.75);transition:color .3s" style-hover="color:#4ecdc0">← Servizi</a>
+    <a href="mailto:riccardo.santini@email.it" style="color:rgba(236,233,226,.75);transition:color .3s" style-hover="color:#4ecdc0">Contatti</a>
+  </div>
+</nav>
+
+<header data-screen-label="Editing hero" style="padding:160px 32px 60px;max-width:1400px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:space-between;gap:28px 64px;align-items:end;animation:rise 1s cubic-bezier(.2,.7,.2,1) both">
+  <div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:#4ecdc0;margin-bottom:20px">Post‑produzione</div>
+    <h1 style="margin:0;font-family:Syne,sans-serif;font-weight:800;font-size:clamp(48px,9vw,140px);line-height:.9;letter-spacing:-.04em;text-transform:uppercase">Video<br>editing</h1>
+  </div>
+  <p style="margin:0;flex:1 1 320px;font-size:17px;line-height:1.6;opacity:.75;max-width:40ch">Montaggio, color correction e sound design. Trascina il cursore per confrontare il girato originale con il grade finale.</p>
+</header>
+
+<section data-screen-label="Prima / dopo" style="max-width:1400px;margin:0 auto;padding:0 32px 100px">
+  <div ref="{{ cmpRef }}" onPointerDown="{{ onDown }}" onPointerMove="{{ onMoveP }}" onPointerUp="{{ onUp }}" onPointerCancel="{{ onUp }}" style="position:relative;aspect-ratio:21/9;border-radius:6px;overflow:hidden;cursor:ew-resize;user-select:none;touch-action:none;background:repeating-linear-gradient(135deg,#272b30 0 12px,#20242a 12px 24px)">
+    <div style="position:absolute;inset:0;background:linear-gradient(120deg,rgba(214,170,110,.28),rgba(60,90,120,.35) 60%,rgba(20,20,30,.5));mix-blend-mode:screen"></div>
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(0,0,0,0) 40%,rgba(0,0,0,.55) 100%)"></div>
+    <span style="position:absolute;right:20px;bottom:16px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.15em;opacity:.8">DOPO · color grade</span>
+    <div style="position:absolute;inset:0;width:{{ pct }};overflow:hidden;background:repeating-linear-gradient(135deg,#272b30 0 12px,#20242a 12px 24px);filter:saturate(.3) brightness(1.15) contrast(.85)">
+      <div style="position:absolute;inset:0;background:linear-gradient(120deg,rgba(120,140,120,.15),rgba(120,120,120,.1))"></div>
+      <span style="position:absolute;left:20px;bottom:16px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.15em;opacity:.8;white-space:nowrap">PRIMA · log flat</span>
+    </div>
+    <div style="position:absolute;top:0;bottom:0;left:{{ pct }};width:2px;background:#ece9e2;transform:translateX(-1px);box-shadow:0 0 24px rgba(236,233,226,.5)">
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:999px;background:#4ecdc0;color:#16181b;display:grid;place-items:center;font-size:14px;font-weight:600;letter-spacing:-.05em">◂ ▸</div>
+    </div>
+  </div>
+  <div style="display:flex;justify-content:space-between;margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:11px;opacity:.55"><span>Improove — brand film, scena 04</span><span>LUT custom · Rec.709</span></div>
+</section>
+
+<section data-screen-label="Esempi" style="max-width:1400px;margin:0 auto;padding:0 32px 160px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px">
+  <sc-for list="{{ works }}" as="w" hint-placeholder-count="3">
+    <article style="display:flex;flex-direction:column;gap:14px;transition:transform .5s cubic-bezier(.2,.7,.2,1)" style-hover="transform:translateY(-6px)">
+      <div style="position:relative;aspect-ratio:16/9;border-radius:6px;overflow:hidden;background:repeating-linear-gradient(135deg,#272b30 0 12px,#20242a 12px 24px)">
+        <video data-auto="" src="{{ w.src }}" data-poster="{{ w.poster }}" preload="none" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video>
+        <div style="position:absolute;left:0;right:0;bottom:0;height:34px;display:flex;align-items:center;gap:3px;padding:0 12px;background:rgba(22,24,27,.7)">
+          <sc-for list="{{ w.bars }}" as="b" hint-placeholder-count="12"><span style="height:10px;flex:1;background:rgba(236,233,226,.35);border-radius:2px;width:{{ b.w }}"></span></sc-for>
+        </div>
+        <span style="position:absolute;right:12px;top:10px;font-family:'JetBrains Mono',monospace;font-size:11px;opacity:.6">{{ w.dur }}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:12px">
+        <span style="font-family:Syne,sans-serif;font-weight:700;font-size:17px">{{ w.title }}</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;opacity:.5;white-space:nowrap">{{ w.kind }}</span>
+      </div>
+      <p style="margin:0;font-size:14px;line-height:1.55;opacity:.7">{{ w.desc }}</p>
+    </article>
+  </sc-for>
+</section>
+
+<footer style="padding:60px 32px;border-top:1px solid rgba(236,233,226,.12);display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;max-width:1400px;margin:0 auto;font-size:14px;opacity:.7">
+  <a href="Home.dc.html#servizi">← Tutti i servizi</a>
+  <a href="mailto:riccardo.santini@email.it?subject=Video%20editing">Richiedi un preventivo →</a>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state={p:50,drag:false};
+  constructor(p){super(p);this.cmpRef=React.createRef();}
+  componentDidMount(){ this.wireVideos(); }
+  componentWillUnmount(){ this.io&&this.io.disconnect(); }
+  // Muted looping previews: play only while on screen, pause otherwise.
+  wireVideos(){
+    this.io=new IntersectionObserver(es=>es.forEach(e=>{ const v=e.target;
+      if(e.isIntersecting){ v.preload='auto'; v.play().catch(()=>{}); } else v.pause(); }),{threshold:.25});
+    document.querySelectorAll('video[data-auto]').forEach(v=>{ if(v.dataset.poster) v.poster=v.dataset.poster; v.muted=true; v.loop=true; v.playsInline=true; this.io.observe(v); });
+  }
+  set(e){const r=this.cmpRef.current.getBoundingClientRect();const p=Math.min(100,Math.max(0,(e.clientX-r.left)/r.width*100));this.setState({p});}
+  renderVals(){
+    const vid=n=>({src:'assets/videos/'+n+'.mp4',poster:'assets/posters/'+n+'.jpg'});
+    const works=[
+      {...vid('ai-conf-26'),title:'AI Conf 2026 — Aftermovie',kind:'montaggio',dur:'01:30',desc:'Ritmo serrato sul talk e sul networking, sincronizzato alla traccia audio.',bars:[1,2,1,3,2,1,2,3,1,2,1,2].map(w=>({w:w*8+'%'}))},
+      {...vid('reel-theforkawards'),title:'Blinkoo — Reel',kind:'color + sound',dur:'00:44',desc:'Grade caldo coerente con il brand, sound design dei cut.',bars:[2,1,3,1,2,2,1,3,2,1,2,1].map(w=>({w:w*8+'%'}))},
+      {...vid('videocreators'),title:'Improove — Brand film',kind:'montaggio',dur:'01:23',desc:'Montaggio, grafiche e sound design per il lancio del prodotto.',bars:[1,3,2,2,1,3,1,2,2,1,3,2].map(w=>({w:w*8+'%'}))}
+    ];
+    return {cmpRef:this.cmpRef,pct:this.state.p+'%',works,
+      onDown:e=>{e.currentTarget.setPointerCapture(e.pointerId);this.setState({drag:true});this.set(e);},
+      onMoveP:e=>{if(this.state.drag)this.set(e);},
+      onUp:()=>this.setState({drag:false})};
+  }
+}
+</script>
+</body>
+</html>

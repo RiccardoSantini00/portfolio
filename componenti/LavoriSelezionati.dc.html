@@ -1,0 +1,67 @@
+<!--
+  LavoriSelezionati.dc.html — "Lavori selezionati" gallery, parked outside the Home page.
+  Three columns of photos scrolling endlessly (alternating directions, pause on hover).
+  Self-contained: open it on its own to preview, or paste the <section> plus the
+  `cols` data back into a page (fix the ../ paths) to reuse it.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Lavori selezionati — componente</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&amp;family=Manrope:wght@400;500;600&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;background:#16181b;color:#ece9e2;font-family:Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#ece9e2;text-decoration:none}a:hover{color:#4ecdc0}
+@keyframes scrollUp{to{transform:translateY(-50%)}}
+</style>
+</helmet>
+<div style="background:#16181b;color:#ece9e2;min-height:100vh;overflow-x:clip">
+
+<section id="lavori" data-screen-label="Lavori" style="padding:120px 0 80px;max-width:1400px;margin:0 auto">
+  <div style="display:flex;justify-content:space-between;align-items:end;gap:24px;margin:0 32px 48px;flex-wrap:wrap">
+    <h2 style="margin:0;font-family:Syne,sans-serif;font-weight:800;font-size:clamp(32px,4.5vw,64px);line-height:.95;letter-spacing:-.03em;text-transform:uppercase">Lavori <span style="color:#4ecdc0">selezionati</span></h2>
+    <a href="../Fotografia.dc.html" style="font-size:14px;letter-spacing:.04em;border-bottom:1px solid #4ecdc0;padding-bottom:4px;color:#ece9e2;transition:color .3s" style-hover="color:#4ecdc0">Vedi tutto →</a>
+  </div>
+  <div data-reveal="fast" style="height:min(82vh,900px);overflow:hidden;margin:0 32px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 12%,#000 88%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 12%,#000 88%,transparent 100%);opacity:0;transition:opacity .6s ease">
+    <sc-for list="{{ cols }}" as="col" hint-placeholder-count="3">
+      <div style="display:flex;flex-direction:column;gap:20px;will-change:transform;animation:scrollUp {{ col.dur }} linear infinite;animation-direction:{{ col.dir }}" style-hover="animation-play-state:paused">
+        <sc-for list="{{ col.shots }}" as="s" hint-placeholder-count="8">
+          <div style="position:relative;flex:none;overflow:hidden;border-radius:6px;background:repeating-linear-gradient(135deg,#272b30 0 12px,#20242a 12px 24px);aspect-ratio:{{ s.ar }};user-select:none;transition:transform .35s cubic-bezier(.2,.7,.2,1)" style-hover="transform:scale(1.02)">
+            <img src="{{ s.src }}" alt="{{ s.label }}" loading="lazy" decoding="async" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
+            <div style="position:absolute;inset:auto 0 0 0;height:40%;background:linear-gradient(180deg,rgba(22,24,27,0),rgba(22,24,27,.6));pointer-events:none"></div>
+            <span style="position:absolute;left:14px;bottom:12px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em;color:rgba(236,233,226,.85);pointer-events:none">{{ s.label }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;gallerySpeed&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;normale&quot;,&quot;options&quot;:[&quot;lenta&quot;,&quot;normale&quot;,&quot;veloce&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Galleria&quot;}}">
+class Component extends DCLogic {
+  componentDidMount(){ this.reveal(); }
+  componentDidUpdate(){ this.reveal(); }
+  reveal(){ document.querySelectorAll('[data-reveal]').forEach(el=>{ el.style.opacity='1'; }); }
+  renderVals(){
+    const ph='../assets/photos/', mk=a=>{const l=a.map(s=>({label:s[0],src:ph+s[1],ar:s[1].startsWith('travel')?'2/3':'3/2'}));return l.concat(l);};
+    const sp=this.props.gallerySpeed??'normale', k=sp==='lenta'?1.5:sp==='veloce'?.65:1;
+    const cols=[
+      {dur:(38*k)+'s',dir:'normal',shots:mk([['giappone · luci notturne','travel/japan-6.jpg'],['web day 2026 · speaker','events/dsc00187.jpg'],['giappone · fuji','travel/japan-4.jpg'],['web day 2026 · platea','events/dsc00200.jpg']])},
+      {dur:(46*k)+'s',dir:'reverse',shots:mk([['web day 2025 · selfie dal palco','events/dsc06966.jpg'],['giappone · nara','travel/japan-5.jpg'],['web day 2026 · accoglienza','events/dsc00038.jpg'],['giappone · sakura','travel/japan-7.jpg']])},
+      {dur:(42*k)+'s',dir:'normal',shots:mk([['giappone · lanterne','travel/japan-2.jpg'],['web day 2026 · talk','events/dsc00154.jpg'],['giappone · castello','travel/japan-3.jpg'],['web day 2025 · pubblico','events/dsc06739.jpg']])}
+    ];
+    return {cols};
+  }
+}
+</script>
+</body>
+</html>
