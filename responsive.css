@@ -22,9 +22,11 @@
   /* ---------- Home: hero ---------- */
   #top .rs-corners { inset: 76px 14px 44px !important; }
   .m-hud-left { top: 92px !important; left: 30px !important; }
-  #top h1 { font-size: 8.6vw !important; }
-  #top div:has(> h1) { max-width: 100%; box-sizing: border-box; padding: 0 16px !important; gap: 22px !important; }
+  #top h1 { font-size: 13vw !important; }
+  #top { align-items: start !important; }
+  #top div:has(> h1) { max-width: 100%; box-sizing: border-box; padding: 200px 16px 0 !important; gap: 22px !important; }
   #top div:has(> h1) a { padding: 13px 20px !important; font-size: 13px !important; }
+  .m-reel { top: auto !important; bottom: 96px !important; left: 16px !important; right: 16px !important; width: auto !important; translate: none !important; }
   #top > div:last-child { padding: 0 20px !important; font-size: 10px !important; justify-content: center !important; }
 
   /* ---------- Home: marquee, about ---------- */

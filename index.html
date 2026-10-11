@@ -20,9 +20,6 @@
 html,body{margin:0;background:#16181b;color:#ece9e2;font-family:Satoshi,system-ui,sans-serif;-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
 a{color:#ece9e2;text-decoration:none}a:hover{color:#4ecdc0}
 ::selection{background:#4ecdc0;color:#16181b}
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes spinr{to{transform:rotate(-360deg)}}
-@keyframes breathe{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(1.08);opacity:.85}}
 @keyframes rise{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
 </style>
 </helmet>
@@ -41,17 +38,28 @@ a{color:#ece9e2;text-decoration:none}a:hover{color:#4ecdc0}
 </nav>
 
 <!-- HERO -->
-<section id="top" data-screen-label="Hero" style="position:relative;height:100vh;min-height:680px;display:grid;place-items:center;overflow:hidden">
-  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 40%,#1e2226 0%,#16181b 70%)"></div>
-  <div style="position:absolute;inset:0;display:grid;place-items:center;perspective:1200px;pointer-events:none">{{ lens }}</div>
-  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 55%,rgba(22,24,27,0) 0%,rgba(22,24,27,.5) 60%,#16181b 100%);pointer-events:none"></div>
+<section id="top" data-screen-label="Hero" style="position:relative;height:100vh;min-height:680px;display:grid;align-items:center;justify-items:start;overflow:hidden">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 30% 45%,#1e2226 0%,#16181b 70%)"></div>
   <div class="rs-corners" style="inset:92px 32px 72px"></div>
   <div class="rs-hud m-hud-left" style="position:absolute;top:110px;left:56px;display:flex;gap:10px;align-items:center"><span class="rs-blink" style="width:8px;height:8px;border-radius:50%;background:#4ecdc0;box-shadow:0 0 12px #4ecdc0"></span>Rec <span data-timecode="" style="color:#ece9e2;letter-spacing:.12em"></span></div>
   <div class="rs-hud m-hide" style="position:absolute;top:110px;right:56px;color:rgba(236,233,226,.55)">ISO 100 · 1/50 · AWB</div>
-  <div style="position:relative;text-align:center;display:flex;flex-direction:column;align-items:center;gap:28px;padding:0 24px;animation:rise 1.2s cubic-bezier(.2,.7,.2,1) both">
+  <!-- Showreel monitor: muted loop on the right, links to the Video page -->
+  <a href="Video.dc.html" class="m-reel" data-cursor="Play" aria-label="Guarda lo showreel" style="position:absolute;right:clamp(24px,5vw,80px);top:50%;width:min(42vw,820px);translate:0 -50%;display:flex;flex-direction:column;gap:12px;animation:rise 1.2s cubic-bezier(.2,.7,.2,1) .25s both">
+    <div style="position:relative;aspect-ratio:16/9;border-radius:6px;overflow:hidden;background:#1e2226;box-shadow:0 40px 120px -40px rgba(78,205,192,.35),0 0 0 1px rgba(236,233,226,.1)">
+      <video data-auto="" data-poster="assets/posters/showreel.jpg" src="assets/videos/showreel.mp4" preload="none" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video>
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,24,27,.25),rgba(22,24,27,0) 30%,rgba(22,24,27,0) 70%,rgba(22,24,27,.35))"></div>
+      <span style="position:absolute;width:22px;height:22px;border-color:#4ecdc0;border-style:solid;top:14px;left:14px;border-width:1.5px 0 0 1.5px"></span>
+      <span style="position:absolute;width:22px;height:22px;border-color:#4ecdc0;border-style:solid;top:14px;right:14px;border-width:1.5px 1.5px 0 0"></span>
+      <span style="position:absolute;width:22px;height:22px;border-color:#4ecdc0;border-style:solid;bottom:14px;left:14px;border-width:0 0 1.5px 1.5px"></span>
+      <span style="position:absolute;width:22px;height:22px;border-color:#4ecdc0;border-style:solid;bottom:14px;right:14px;border-width:0 1.5px 1.5px 0"></span>
+      <span class="rs-hud" style="position:absolute;top:18px;left:46px;display:flex;gap:8px;align-items:center"><span class="rs-blink" style="width:6px;height:6px;border-radius:50%;background:#e5484d"></span>Live</span>
+    </div>
+    <div style="display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(236,233,226,.55)"><span>Showreel · 2026</span><span style="color:#4ecdc0">Guarda tutto →</span></div>
+  </a>
+  <div style="position:relative;text-align:left;display:flex;flex-direction:column;align-items:flex-start;gap:28px;padding:0 clamp(24px,5vw,80px);animation:rise 1.2s cubic-bezier(.2,.7,.2,1) both">
     <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:#4ecdc0">Fotografo &amp; Videomaker</div>
     <h1 style="margin:0;font-family:'Clash Display',sans-serif;font-weight:800;font-size:clamp(42px,8vw,148px);line-height:.9;letter-spacing:-.03em;text-transform:uppercase;text-wrap:balance">Riccardo<br>Santini</h1>
-    <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:8px">
+    <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-start;margin-top:8px">
       <a href="mailto:me@riccardosantini.com?subject=Collaborazione" style="display:inline-flex;align-items:center;gap:10px;padding:16px 28px;border-radius:999px;background:#ece9e2;color:#16181b;font-weight:600;font-size:14px;letter-spacing:.04em;transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s,background .35s" style-hover="box-shadow:0 20px 50px -15px rgba(78,205,192,.5);background:#4ecdc0;color:#16181b">Contattami <span style="font-size:16px">→</span></a>
       <a href="assets/cv-riccardo-santini.pdf" download="cv-riccardo-santini.pdf" style="display:inline-flex;align-items:center;gap:10px;padding:16px 28px;border-radius:999px;border:1px solid rgba(236,233,226,.3);color:#ece9e2;font-weight:600;font-size:14px;letter-spacing:.04em;transition:border-color .35s,color .35s,transform .35s cubic-bezier(.2,.7,.2,1)" style-hover="border-color:#4ecdc0;color:#4ecdc0">Download CV <span style="font-size:16px">↓</span></a>
     </div>
@@ -166,41 +174,17 @@ a{color:#ece9e2;text-decoration:none}a:hover{color:#4ecdc0}
 
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;lensIntensity&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:1,&quot;min&quot;:0,&quot;max&quot;:2,&quot;step&quot;:0.1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Hero&quot;},&quot;reduceMotion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Hero&quot;}}">
+<script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
   constructor(p){
     super(p);
-    this.rootRef=React.createRef(); this.lensRef=React.createRef();
-    this.lens=this.buildLens();
-  }
-  buildLens(){
-    const h=React.createElement, rings=[];
-    for(let i=0;i<8;i++){
-      const size=560-i*58, z=-i*34, a=.18+i*.05, teal=i===2||i===5;
-      rings.push(h('div',{key:i,style:{position:'absolute',width:size,height:size,borderRadius:'50%',
-        border:(i%3===1?'1px dashed ':'1px solid ')+(teal?'rgba(78,205,192,'+(a+.15).toFixed(2)+')':'rgba(236,233,226,'+a.toFixed(2)+')'),
-        transform:'translateZ('+z+'px)',
-        animation:(i%2?'spinr ':'spin ')+(40+i*10)+'s linear infinite',
-        boxShadow:i===0?'0 0 80px rgba(236,233,226,.08) inset':'none'}}));
-      if(i%2===0){
-        const ticks=[]; for(let t=0;t<24;t++) ticks.push(h('span',{key:t,style:{position:'absolute',left:'50%',top:0,width:1,height:t%6===0?14:7,background:t%6===0?'#4ecdc0':'rgba(236,233,226,'+(a+.2).toFixed(2)+')',transformOrigin:'0 '+(size/2)+'px',transform:'rotate('+(t*15)+'deg)'}}));
-        rings.push(h('div',{key:'t'+i,style:{position:'absolute',width:size,height:size,borderRadius:'50%',transform:'translateZ('+(z+1)+'px)',animation:(i%4?'spin ':'spinr ')+(60+i*8)+'s linear infinite'}},ticks));
-      }
-    }
-    rings.push(h('div',{key:'ap',style:{position:'absolute',width:150,height:150,borderRadius:'50%',transform:'translateZ(-290px)',background:'radial-gradient(circle,#2c3136 0%,#16181b 65%)',boxShadow:'0 0 120px 20px rgba(78,205,192,.14)',animation:'breathe 6s ease-in-out infinite'}}));
-    rings.push(h('div',{key:'glow',style:{position:'absolute',width:700,height:700,borderRadius:'50%',transform:'translateZ(-400px)',background:'radial-gradient(circle,rgba(78,205,192,.08) 0%,rgba(22,24,27,0) 60%)'}}));
-    return h('div',{ref:this.lensRef,style:{position:'relative',width:0,height:0,display:'grid',placeItems:'center',transformStyle:'preserve-3d',transition:'transform .6s cubic-bezier(.2,.7,.2,1)',transform:'rotateX(0deg) rotateY(0deg)'}},
-      h('div',{style:{position:'absolute',transformStyle:'preserve-3d',display:'grid',placeItems:'center',width:0,height:0}},rings));
+    this.rootRef=React.createRef();
   }
   componentDidMount(){
-    this.onMove=e=>{ const el=this.lensRef.current; if(!el||this.props.reduceMotion) return;
-      const k=this.props.lensIntensity??1, x=e.clientX/innerWidth-.5, y=e.clientY/innerHeight-.5;
-      el.style.transform='rotateX('+(-y*36*k).toFixed(2)+'deg) rotateY('+(x*44*k).toFixed(2)+'deg)'; };
     this.onScroll=()=>{ if(this.raf) return; this.raf=requestAnimationFrame(()=>{ this.raf=0;
-      const lens=this.lensRef.current; if(lens&&scrollY<innerHeight){ lens.style.opacity=String(1-scrollY/innerHeight*1.2); }
       this.reveal();
     }); };
-    addEventListener('mousemove',this.onMove); addEventListener('scroll',this.onScroll,{passive:true}); addEventListener('resize',this.onScroll);
+    addEventListener('scroll',this.onScroll,{passive:true}); addEventListener('resize',this.onScroll);
     this.onScroll(); this.wireVideos(); this.sizeCarousels();
     this.onResize=()=>this.sizeCarousels(); addEventListener('resize',this.onResize);
   }
@@ -222,7 +206,7 @@ class Component extends DCLogic {
       if(v.dataset.poster) v.poster=v.dataset.poster; v.muted=true; v.loop=true; v.playsInline=true; this.io.observe(v); });
   }
   reveal(){ document.querySelectorAll('[data-reveal]').forEach(el=>{ if(el.dataset.shown) return; const r=el.getBoundingClientRect(); if(r.top<innerHeight*.92&&r.bottom>0){ el.dataset.shown='1'; el.style.opacity='1'; el.style.transform='none'; } }); }
-  componentWillUnmount(){ removeEventListener('resize',this.onResize); this.io&&this.io.disconnect(); removeEventListener('mousemove',this.onMove); removeEventListener('scroll',this.onScroll); removeEventListener('resize',this.onScroll); }
+  componentWillUnmount(){ removeEventListener('resize',this.onResize); this.io&&this.io.disconnect(); removeEventListener('scroll',this.onScroll); removeEventListener('resize',this.onScroll); }
   renderVals(){
     const services=[
       {name:'Fotografia',desc:'Eventi, reportage e viaggi.',href:'Fotografia.dc.html'},
@@ -239,7 +223,7 @@ class Component extends DCLogic {
     const words=['Fotografia','Video','Editing','Social media','Eventi','Viaggi'], marquee=words.concat(words);
     // Each list is doubled so the carousel can loop seamlessly; copies stay hidden unless it moves.
     projects.forEach(p=>{ p.items=p.items.concat(p.items.map(it=>({...it,dup:'1'}))); });
-    return {rootRef:this.rootRef,lens:this.lens,services,projects,marquee};
+    return {rootRef:this.rootRef,services,projects,marquee};
   }
 }
 </script>
