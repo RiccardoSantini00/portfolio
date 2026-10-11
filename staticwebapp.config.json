@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json.schemastore.org/staticwebapp.config.json",
+  "trailingSlash": "auto",
+  "routes": [
+    { "route": "/Home.dc.html", "redirect": "/", "statusCode": 301 },
+    { "route": "/fotografia", "rewrite": "/Fotografia.dc.html" },
+    { "route": "/video", "rewrite": "/Video.dc.html" },
+    { "route": "/editing", "rewrite": "/Editing.dc.html" },
+    { "route": "/social", "rewrite": "/Social.dc.html" },
+    { "route": "/cv", "redirect": "/assets/cv-riccardo-santini.pdf", "statusCode": 302 },
+
+    { "route": "/assets/videos/*",  "headers": { "cache-control": "public, max-age=31536000, immutable" } },
+    { "route": "/assets/photos/*",  "headers": { "cache-control": "public, max-age=31536000, immutable" } },
+    { "route": "/assets/posters/*", "headers": { "cache-control": "public, max-age=31536000, immutable" } },
+
+    { "route": "/.thumbnail", "statusCode": 404 },
+    { "route": "/tree.md",    "statusCode": 404 }
+  ],
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/assets/*", "/componenti/*", "*.css", "*.js", "*.pdf", "*.jpg", "*.jpeg", "*.png", "*.mp4"]
+  },
+  "responseOverrides": {
+    "404": { "rewrite": "/index.html", "statusCode": 404 }
+  },
+  "globalHeaders": {
+    "cache-control": "public, max-age=600, must-revalidate",
+    "x-content-type-options": "nosniff",
+    "referrer-policy": "strict-origin-when-cross-origin"
+  },
+  "mimeTypes": {
+    ".html": "text/html; charset=utf-8",
+    ".css": "text/css; charset=utf-8",
+    ".js": "text/javascript; charset=utf-8",
+    ".mp4": "video/mp4",
+    ".pdf": "application/pdf",
+    ".jpg": "image/jpeg",
+    ".jpeg": "image/jpeg",
+    ".png": "image/png"
+  }
+}
