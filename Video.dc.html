@@ -4,14 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
+<link rel="stylesheet" href="./motion.css">
+<link rel="stylesheet" href="./responsive.css">
+<script src="./motion.js"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
 <title>Video — Riccardo Santini</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&amp;f[]=satoshi@400,500,700&amp;display=swap" rel="stylesheet">
 <style>
-html,body{margin:0;background:#16181b;color:#ece9e2;font-family:Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+html,body{margin:0;background:#16181b;color:#ece9e2;font-family:Satoshi,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 a{color:#ece9e2;text-decoration:none}a:hover{color:#4ecdc0}
 @keyframes rise{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(236,233,226,.35)}70%{box-shadow:0 0 0 18px rgba(236,233,226,0)}}
@@ -20,31 +25,33 @@ a{color:#ece9e2;text-decoration:none}a:hover{color:#4ecdc0}
 </helmet>
 <div ref="{{ rootRef }}" style="background:#16181b;color:#ece9e2;min-height:100vh;overflow-x:clip">
 <nav style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:18px 32px;background:linear-gradient(180deg,rgba(22,24,27,.85),rgba(22,24,27,0));backdrop-filter:blur(6px)">
-  <a href="Home.dc.html" style="font-family:Syne,sans-serif;font-weight:800;font-size:15px;letter-spacing:.12em;text-transform:uppercase">RS</a>
+  <a href="Home.dc.html" style="font-family:'Clash Display',sans-serif;font-weight:800;font-size:15px;letter-spacing:.12em;text-transform:uppercase">RS</a>
   <div style="display:flex;gap:28px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:500;white-space:nowrap">
     <a href="Home.dc.html#servizi" style="color:rgba(236,233,226,.75);transition:color .3s" style-hover="color:#4ecdc0">← Servizi</a>
-    <a href="mailto:riccardo.santini@email.it" style="color:rgba(236,233,226,.75);transition:color .3s" style-hover="color:#4ecdc0">Contatti</a>
+    <a href="mailto:me@riccardosantini.com" style="color:rgba(236,233,226,.75);transition:color .3s" style-hover="color:#4ecdc0">Contatti</a>
   </div>
 </nav>
 
 <header data-screen-label="Video hero" style="position:relative;height:100vh;min-height:640px;display:grid;place-items:center;overflow:hidden">
-  <div style="position:absolute;inset:6vh 32px;border-radius:6px;overflow:hidden;background:repeating-linear-gradient(135deg,#272b30 0 12px,#20242a 12px 24px)">
+  <div class="m-frame" style="position:absolute;inset:6vh 32px;border-radius:6px;overflow:hidden;background:repeating-linear-gradient(135deg,#272b30 0 12px,#20242a 12px 24px)">
     <video data-auto="" src="assets/videos/showreel.mp4" poster="assets/posters/showreel.jpg" preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video>
   </div>
-  <div style="position:absolute;inset:6vh 32px;border-radius:6px;background:linear-gradient(180deg,rgba(22,24,27,.45),rgba(22,24,27,.85))"></div>
-  <div style="position:absolute;top:calc(6vh + 20px);left:52px;right:52px;display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;opacity:.6"><span>● REC</span><span>showreel · 00:50</span></div>
+  <div class="m-frame" style="position:absolute;inset:6vh 32px;border-radius:6px;background:linear-gradient(180deg,rgba(22,24,27,.45),rgba(22,24,27,.85))"></div>
+  <div class="rs-corners" style="inset:calc(6vh + 16px) 48px"></div>
+  <div class="rs-cross"></div>
+  <div class="rs-hud m-vhud" style="position:absolute;top:calc(6vh + 28px);left:72px;right:72px;display:flex;justify-content:space-between;align-items:center"><span style="display:flex;gap:10px;align-items:center"><span class="rs-blink" style="width:8px;height:8px;border-radius:50%;background:#4ecdc0;box-shadow:0 0 12px #4ecdc0"></span>Rec <span data-timecode="" style="color:#ece9e2;letter-spacing:.12em"></span></span><span class="m-hide" style="color:rgba(236,233,226,.6)">showreel · 00:50</span></div>
   <div style="position:relative;text-align:center;display:flex;flex-direction:column;align-items:center;gap:30px;animation:rise 1s cubic-bezier(.2,.7,.2,1) both">
-    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:#4ecdc0">Video</div>
-    <h1 style="margin:0;font-family:Syne,sans-serif;font-weight:800;font-size:clamp(56px,11vw,160px);line-height:.9;letter-spacing:-.04em;text-transform:uppercase">Video</h1>
-    <button onClick="{{ playReel }}" aria-label="Guarda lo showreel" style="width:92px;height:92px;border-radius:999px;border:1px solid rgba(236,233,226,.5);background:rgba(22,24,27,.4);backdrop-filter:blur(8px);color:#ece9e2;font-size:26px;display:grid;place-items:center;cursor:pointer;animation:pulse 2.4s ease-out infinite;transition:transform .4s cubic-bezier(.2,.7,.2,1),background .4s" style-hover="transform:scale(1.1);background:#4ecdc0;color:#16181b">▶</button>
+    <div data-scramble="" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:#4ecdc0">Video</div>
+    <h1 style="margin:0;font-family:'Clash Display',sans-serif;font-weight:800;font-size:clamp(56px,11vw,160px);line-height:.9;letter-spacing:-.04em;text-transform:uppercase">Video</h1>
+    <button onClick="{{ playReel }}" aria-label="Guarda lo showreel" data-magnetic=".35" data-cursor="Play" style="width:92px;height:92px;border-radius:999px;border:1px solid rgba(236,233,226,.5);background:rgba(22,24,27,.4);backdrop-filter:blur(8px);color:#ece9e2;font-size:26px;display:grid;place-items:center;cursor:pointer;animation:pulse 2.4s ease-out infinite;transition:transform .4s cubic-bezier(.2,.7,.2,1),background .4s" style-hover="transform:scale(1.1);background:#4ecdc0;color:#16181b">▶</button>
     <div style="font-family:'JetBrains Mono',monospace;font-size:11px;opacity:.5">guarda lo showreel con audio</div>
   </div>
 </header>
 
-<section data-screen-label="Video sparsi" style="position:relative;max-width:1400px;margin:0 auto;padding:120px 32px 160px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:start">
+<section data-screen-label="Video sparsi" class="m-clips" style="position:relative;max-width:1400px;margin:0 auto;padding:120px 32px 160px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:start">
   <sc-for list="{{ clips }}" as="c" hint-placeholder-count="5">
-    <a href="{{ c.src }}" onClick="{{ c.open }}" data-reveal="" style="grid-column:{{ c.col }};margin-top:{{ c.mt }};display:block;position:relative;opacity:0;transform:translateY(40px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)">
-      <div style="position:relative;overflow:hidden;border-radius:6px;background:repeating-linear-gradient(135deg,#272b30 0 12px,#20242a 12px 24px);aspect-ratio:{{ c.ar }};transition:transform .5s cubic-bezier(.2,.7,.2,1)" style-hover="transform:scale(1.02) rotate(-.5deg)">
+    <a href="{{ c.src }}" onClick="{{ c.open }}" data-reveal="" data-cursor="Play" class="{{ c.cls }}" style="grid-column:{{ c.col }};margin-top:{{ c.mt }};display:block;position:relative;opacity:0;transform:translateY(40px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)">
+      <div data-tilt="8" style="position:relative;overflow:hidden;border-radius:6px;background:repeating-linear-gradient(135deg,#272b30 0 12px,#20242a 12px 24px);aspect-ratio:{{ c.ar }};transition:transform .5s cubic-bezier(.2,.7,.2,1)" style-hover="transform:scale(1.02) rotate(-.5deg)">
         <video data-auto="" src="{{ c.src }}" data-poster="{{ c.poster }}" preload="none" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video>
         <div style="position:absolute;inset:0;display:grid;place-items:center">
           <span style="width:60px;height:60px;border-radius:999px;border:1px solid rgba(236,233,226,.4);display:grid;place-items:center;font-size:18px;background:rgba(22,24,27,.35);transition:background .4s,color .4s,transform .4s" style-hover="background:#4ecdc0;color:#16181b;transform:scale(1.1)">▶</span>
@@ -52,7 +59,7 @@ a{color:#ece9e2;text-decoration:none}a:hover{color:#4ecdc0}
         <span style="position:absolute;right:14px;top:12px;font-family:'JetBrains Mono',monospace;font-size:11px;opacity:.6">{{ c.dur }}</span>
       </div>
       <div style="display:flex;justify-content:space-between;gap:12px;margin-top:12px;font-size:13px">
-        <span style="font-family:Syne,sans-serif;font-weight:700;font-size:16px;letter-spacing:-.01em">{{ c.title }}</span>
+        <span style="font-family:'Clash Display',sans-serif;font-weight:700;font-size:16px;letter-spacing:-.01em">{{ c.title }}</span>
         <span style="font-family:'JetBrains Mono',monospace;font-size:11px;opacity:.5;white-space:nowrap">{{ c.kind }}</span>
       </div>
     </a>
@@ -66,9 +73,9 @@ a{color:#ece9e2;text-decoration:none}a:hover{color:#4ecdc0}
   </div>
 </sc-if>
 
-<footer style="padding:60px 32px;border-top:1px solid rgba(236,233,226,.12);display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;max-width:1400px;margin:0 auto;font-size:14px;opacity:.7">
+<footer class="m-foot" style="padding:60px 32px;border-top:1px solid rgba(236,233,226,.12);display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;max-width:1400px;margin:0 auto;font-size:14px;opacity:.7">
   <a href="Home.dc.html#servizi">← Tutti i servizi</a>
-  <a href="mailto:riccardo.santini@email.it?subject=Video">Richiedi un preventivo →</a>
+  <a href="mailto:me@riccardosantini.com?subject=Video">Richiedi un preventivo →</a>
 </footer>
 </div>
 </x-dc>
@@ -104,7 +111,7 @@ class Component extends DCLogic {
       {title:'Video Creators',kind:'brand',dur:'01:23',ar:'16/9',col:'6 / span 7',mt:'160px',...vid('videocreators')},
       {title:'Vienna — Hyperlapse',kind:'viaggio',dur:'00:09',ar:'9/16',col:'3 / span 3',mt:'60px',...vid('vienna-hyperlapse')},
       {title:'AI Conf 2026 — Reel',kind:'evento',dur:'00:56',ar:'9/16',col:'8 / span 3',mt:'0',...vid('ai-conf-reel')}
-    ].map(c=>({...c,open:show(c.src)}));
+    ].map(c=>({...c,open:show(c.src),cls:c.ar==='16/9'?'m-clip m-wide':'m-clip'}));
     return {rootRef:this.rootRef,clips,player:this.state.player,yes:true,
       playReel:show('assets/videos/showreel.mp4'),
       close:()=>this.setState({player:null}), stop:e=>e.stopPropagation()};

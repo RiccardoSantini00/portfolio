@@ -4,48 +4,53 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="./support.js"></script>
+<link rel="stylesheet" href="./motion.css">
+<link rel="stylesheet" href="./responsive.css">
+<script src="./motion.js"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
 <title>Fotografia — Riccardo Santini</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&amp;f[]=satoshi@400,500,700&amp;display=swap" rel="stylesheet">
 <style>
-html,body{margin:0;background:#16181b;color:#ece9e2;font-family:Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+html,body{margin:0;background:#16181b;color:#ece9e2;font-family:Satoshi,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 a{color:#ece9e2;text-decoration:none}a:hover{color:#4ecdc0}
 @keyframes rise{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
 </style>
 </helmet>
 <div style="background:#16181b;color:#ece9e2;min-height:100vh;overflow-x:clip">
 <nav style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:18px 32px;background:linear-gradient(180deg,rgba(22,24,27,.85),rgba(22,24,27,0));backdrop-filter:blur(6px)">
-  <a href="Home.dc.html" style="font-family:Syne,sans-serif;font-weight:800;font-size:15px;letter-spacing:.12em;text-transform:uppercase">RS</a>
+  <a href="Home.dc.html" style="font-family:'Clash Display',sans-serif;font-weight:800;font-size:15px;letter-spacing:.12em;text-transform:uppercase">RS</a>
   <div style="display:flex;gap:28px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:500;white-space:nowrap">
     <a href="Home.dc.html#servizi" style="color:rgba(236,233,226,.75);transition:color .3s" style-hover="color:#4ecdc0">← Servizi</a>
-    <a href="mailto:riccardo.santini@email.it" style="color:rgba(236,233,226,.75);transition:color .3s" style-hover="color:#4ecdc0">Contatti</a>
+    <a href="mailto:me@riccardosantini.com" style="color:rgba(236,233,226,.75);transition:color .3s" style-hover="color:#4ecdc0">Contatti</a>
   </div>
 </nav>
 
 <header data-screen-label="Fotografia hero" style="padding:160px 32px 60px;max-width:1400px;margin:0 auto;display:flex;flex-direction:column;gap:28px;animation:rise 1s cubic-bezier(.2,.7,.2,1) both">
   <div>
-    <div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:#4ecdc0;margin-bottom:20px">Fotografia</div>
-    <h1 style="margin:0;font-family:Syne,sans-serif;font-weight:800;font-size:clamp(36px,7.6vw,150px);line-height:.9;letter-spacing:-.04em;text-transform:uppercase;white-space:nowrap">Fotografia</h1>
+    <div data-scramble="" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:#4ecdc0;margin-bottom:20px">Fotografia</div>
+    <h1 style="margin:0;font-family:'Clash Display',sans-serif;font-weight:800;font-size:clamp(36px,7.6vw,150px);line-height:.9;letter-spacing:-.04em;text-transform:uppercase;white-space:nowrap">Fotografia</h1>
   </div>
   <p style="margin:0;font-size:17px;line-height:1.6;color:rgba(236,233,226,.78);max-width:52ch">Eventi e viaggi. Passa il mouse sulle immagini: ogni scatto porta con sé il suo contesto.</p>
 </header>
 
 <div data-screen-label="Filtri" style="max-width:1400px;margin:0 auto;padding:0 32px 40px;display:flex;gap:10px;flex-wrap:wrap">
   <sc-for list="{{ cats }}" as="c" hint-placeholder-count="3">
-    <button onClick="{{ c.pick }}" style="padding:10px 18px;border-radius:999px;border:1px solid rgba(236,233,226,.25);background:{{ c.bg }};color:{{ c.fg }};font-family:Manrope,sans-serif;font-size:13px;font-weight:600;letter-spacing:.04em;cursor:pointer;transition:background .3s,color .3s,transform .3s" style-hover="transform:translateY(-2px);border-color:#4ecdc0">{{ c.label }}</button>
+    <button onClick="{{ c.pick }}" data-magnetic=".25" style="padding:10px 18px;border-radius:999px;border:1px solid rgba(236,233,226,.25);background:{{ c.bg }};color:{{ c.fg }};font-family:Satoshi,sans-serif;font-size:13px;font-weight:600;letter-spacing:.04em;cursor:pointer;transition:background .3s,color .3s,transform .3s" style-hover="transform:translateY(-2px);border-color:#4ecdc0">{{ c.label }}</button>
   </sc-for>
 </div>
 
 <section data-screen-label="Griglia" style="max-width:1400px;margin:0 auto;padding:0 32px 160px;columns:3 300px;column-gap:16px">
   <sc-for list="{{ photos }}" as="p" hint-placeholder-count="27">
-    <figure style="margin:0 0 16px;break-inside:avoid;position:relative;overflow:hidden;border-radius:4px;background:repeating-linear-gradient(135deg,#272b30 0 12px,#20242a 12px 24px);aspect-ratio:{{ p.ar }};display:{{ p.disp }};animation:rise .5s cubic-bezier(.2,.7,.2,1) both;transition:transform .6s cubic-bezier(.2,.7,.2,1);cursor:pointer" style-hover="transform:scale(1.015)">
+    <figure data-tilt="6" style="margin:0 0 16px;break-inside:avoid;position:relative;overflow:hidden;border-radius:4px;background:repeating-linear-gradient(135deg,#272b30 0 12px,#20242a 12px 24px);aspect-ratio:{{ p.ar }};display:{{ p.disp }};animation:rise .5s cubic-bezier(.2,.7,.2,1) backwards;transition:transform .6s cubic-bezier(.2,.7,.2,1);cursor:pointer" style-hover="transform:scale(1.015)">
       <img src="{{ p.src }}" alt="{{ p.label }}" loading="lazy" decoding="async" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block">
       <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,24,27,0) 50%,rgba(22,24,27,.85) 100%);opacity:0;transition:opacity .4s" style-hover="opacity:1"></div>
       <figcaption style="position:absolute;left:16px;right:16px;bottom:14px;display:flex;justify-content:space-between;align-items:end;gap:12px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em">
-        <span style="opacity:.8">{{ p.label }}</span><span style="opacity:.5">{{ p.meta }}</span>
+        <span style="opacity:.8">{{ p.label }}</span><span class="m-hide" style="opacity:.5">{{ p.meta }}</span>
       </figcaption>
     </figure>
   </sc-for>
@@ -53,26 +58,24 @@ a{color:#ece9e2;text-decoration:none}a:hover{color:#4ecdc0}
 
 <section data-screen-label="Foto editing" style="max-width:1400px;margin:0 auto;padding:0 32px 160px">
   <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px 64px;align-items:end;margin-bottom:36px">
-    <h2 style="margin:0;font-family:Syne,sans-serif;font-weight:800;font-size:clamp(32px,4.5vw,64px);line-height:.95;letter-spacing:-.03em;text-transform:uppercase">Foto <span style="color:#4ecdc0">editing</span></h2>
-    <p style="margin:0;flex:1 1 320px;font-size:16px;line-height:1.6;color:rgba(236,233,226,.75);max-width:48ch">Ritocco, color correction e sviluppo RAW. Trascina il cursore per confrontare lo scatto originale con quello finale.</p>
+    <h2 style="margin:0;font-family:'Clash Display',sans-serif;font-weight:800;font-size:clamp(32px,4.5vw,64px);line-height:.95;letter-spacing:-.03em;text-transform:uppercase">Foto <span style="color:#4ecdc0">editing</span></h2>
+    <p style="margin:0;flex:1 1 320px;font-size:16px;line-height:1.6;color:rgba(236,233,226,.75);max-width:48ch">Ritocco, color correction e sviluppo RAW. Trascina il cursore verso destra per scoprire lo scatto finale.</p>
   </div>
-  <div ref="{{ cmpRef }}" onPointerDown="{{ onDown }}" onPointerMove="{{ onMoveP }}" onPointerUp="{{ onUp }}" onPointerCancel="{{ onUp }}" style="position:relative;aspect-ratio:16/9;border-radius:6px;overflow:hidden;cursor:ew-resize;user-select:none;touch-action:none;background:repeating-linear-gradient(135deg,#272b30 0 12px,#20242a 12px 24px)">
-    <div style="position:absolute;inset:0;background:linear-gradient(120deg,rgba(214,170,110,.28),rgba(78,205,192,.22) 60%,rgba(30,30,40,.5));mix-blend-mode:screen"></div>
-    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(0,0,0,0) 40%,rgba(0,0,0,.5) 100%)"></div>
-    <span style="position:absolute;right:20px;bottom:16px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.15em;color:#4ecdc0">DOPO</span>
-    <div style="position:absolute;inset:0;width:{{ pct }};overflow:hidden;background:repeating-linear-gradient(135deg,#272b30 0 12px,#20242a 12px 24px);filter:saturate(.3) brightness(1.15) contrast(.85)">
-      <span style="position:absolute;left:20px;bottom:16px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.15em;opacity:.8;white-space:nowrap">PRIMA · RAW</span>
-    </div>
+  <div ref="{{ cmpRef }}" onPointerDown="{{ onDown }}" onPointerMove="{{ onMoveP }}" onPointerUp="{{ onUp }}" onPointerCancel="{{ onUp }}" style="position:relative;width:min(100%,calc(66vh * 2 / 3));aspect-ratio:2/3;margin:0 auto;border-radius:6px;overflow:hidden;cursor:ew-resize;user-select:none;touch-action:pan-y;background:#20242a">
+    <img src="assets/photos/Photo%20editing/pre-pagoda.jpeg" alt="Pagoda in Giappone, scatto originale prima dell'editing" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+    <img src="assets/photos/Photo%20editing/post-pagoda.jpg" alt="Pagoda in Giappone, foto finale dopo l'editing" draggable="false" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;clip-path:{{ clip }}">
+    <div style="position:absolute;inset:0;pointer-events:none;clip-path:{{ clipPre }}"><span style="position:absolute;right:16px;bottom:14px;color:#ece9e2;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.15em;text-shadow:0 1px 8px rgba(0,0,0,.6)">PRIMA · RAW</span></div>
+    <div style="position:absolute;inset:0;pointer-events:none;clip-path:{{ clip }}"><span style="position:absolute;left:16px;bottom:14px;color:#4ecdc0;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.15em;text-shadow:0 1px 8px rgba(0,0,0,.6)">DOPO</span></div>
     <div style="position:absolute;top:0;bottom:0;left:{{ pct }};width:2px;background:#4ecdc0;transform:translateX(-1px);box-shadow:0 0 24px rgba(78,205,192,.5)">
-      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:999px;background:#4ecdc0;color:#16181b;display:grid;place-items:center;font-size:14px;font-weight:600;letter-spacing:-.05em">◂ ▸</div>
+      <div data-handle="" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:999px;background:#4ecdc0;color:#16181b;display:grid;place-items:center;font-size:14px;font-weight:600;letter-spacing:-.05em;touch-action:none">◂ ▸</div>
     </div>
   </div>
-  <div style="display:flex;justify-content:space-between;margin-top:14px;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(236,233,226,.55)"><span>Ritratto · luce naturale</span><span>Lightroom · Photoshop</span></div>
+  <div style="display:flex;justify-content:space-between;width:min(100%,calc(66vh * 2 / 3));margin:14px auto 0;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(236,233,226,.55)"><span>Giappone · pagoda</span><span>Lightroom · Photoshop</span></div>
 </section>
 
-<footer style="padding:60px 32px;border-top:1px solid rgba(236,233,226,.12);display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;max-width:1400px;margin:0 auto;font-size:14px;opacity:.7">
+<footer class="m-foot" style="padding:60px 32px;border-top:1px solid rgba(236,233,226,.12);display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;max-width:1400px;margin:0 auto;font-size:14px;opacity:.7">
   <a href="Home.dc.html#servizi">← Tutti i servizi</a>
-  <a href="mailto:riccardo.santini@email.it?subject=Fotografia">Richiedi un preventivo →</a>
+  <a href="mailto:me@riccardosantini.com?subject=Fotografia">Richiedi un preventivo →</a>
 </footer>
 </div>
 </x-dc>
@@ -80,6 +83,7 @@ a{color:#ece9e2;text-decoration:none}a:hover{color:#4ecdc0}
 class Component extends DCLogic {
   state={cat:'Tutto',p:50,drag:false};
   constructor(p){super(p);this.cmpRef=React.createRef();}
+  // The before/after divider moves left-right: dragging right reveals the edit, which sits on the left of the line.
   set(e){const r=this.cmpRef.current.getBoundingClientRect();const p=Math.min(100,Math.max(0,(e.clientX-r.left)/r.width*100));this.setState({p});}
   renderVals(){
     const all=[
@@ -114,8 +118,8 @@ class Component extends DCLogic {
     const cur=this.state.cat;
     const cats=['Tutto','Eventi','Viaggi'].map(c=>({label:c,bg:c===cur?'#4ecdc0':'transparent',fg:c===cur?'#16181b':'#ece9e2',pick:()=>this.setState({cat:c})}));
     const photos=all.map(p=>{const on=cur==='Tutto'||p.cat===cur;return {...p,disp:on?'block':'none'};});
-    return {cats,photos,cmpRef:this.cmpRef,pct:this.state.p+'%',
-      onDown:e=>{e.currentTarget.setPointerCapture(e.pointerId);this.setState({drag:true});this.set(e);},
+    return {cats,photos,cmpRef:this.cmpRef,pct:this.state.p+'%',clip:'inset(0 '+(100-this.state.p)+'% 0 0)',clipPre:'inset(0 0 0 '+this.state.p+'%)',
+      onDown:e=>{if(e.pointerType!=='mouse'&&!e.target.closest('[data-handle]'))return;e.currentTarget.setPointerCapture(e.pointerId);this.setState({drag:true});this.set(e);},
       onMoveP:e=>{if(this.state.drag)this.set(e);},
       onUp:()=>this.setState({drag:false})};
   }

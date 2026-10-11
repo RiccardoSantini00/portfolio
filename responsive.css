@@ -1,0 +1,95 @@
+/*
+  responsive.css — phone layout (≤ 760px) for every page of the portfolio.
+
+  The pages style elements inline, so these rules override them with !important.
+  Hooks are the m-* classes added in the templates, plus data-screen-label
+  attributes where a section already has one. Desktop is untouched: everything
+  here lives inside the media query. Where an element doesn't read well on a
+  small screen it is hidden (.m-hide) rather than squeezed.
+*/
+
+@media (max-width: 760px) {
+
+  /* ---------- Shared ---------- */
+  .m-hide { display: none !important; }
+  nav { padding: 14px 18px !important; }
+  .m-navlinks { gap: 16px !important; font-size: 11px !important; letter-spacing: .06em !important; }
+  .m-foot { padding: 36px 20px !important; font-size: 13px !important; }
+  .m-pad { padding-left: 20px !important; padding-right: 20px !important; }
+  header[data-screen-label] { padding-left: 20px !important; padding-right: 20px !important; }
+  .rs-grain { opacity: .05; }
+
+  /* ---------- Home: hero ---------- */
+  #top .rs-corners { inset: 76px 14px 44px !important; }
+  .m-hud-left { top: 92px !important; left: 30px !important; }
+  #top h1 { font-size: 8.6vw !important; }
+  #top div:has(> h1) { max-width: 100%; box-sizing: border-box; padding: 0 16px !important; gap: 22px !important; }
+  #top div:has(> h1) a { padding: 13px 20px !important; font-size: 13px !important; }
+  #top > div:last-child { padding: 0 20px !important; font-size: 10px !important; justify-content: center !important; }
+
+  /* ---------- Home: marquee, about ---------- */
+  .m-marquee { height: 190px !important; }
+  #about .rs-hud { top: 92px !important; left: 20px !important; }
+  #about > div[style*="right:32px"] { top: 92px !important; right: 20px !important; }
+  #about { --ph: 78vh !important; }
+  .m-about { grid-template-columns: 1fr !important; gap: 20px !important; padding: calc(var(--ph) - 190px) 20px 64px !important; }
+  .m-skills { grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important; gap: 16px !important; margin-top: 24px !important; }
+  .m-skills span { font-size: 12px !important; padding: 6px 10px !important; white-space: nowrap; }
+  .m-skills > div:last-child > div:last-child { font-size: 14px !important; line-height: 1.6 !important; }
+
+  /* ---------- Home: services ---------- */
+  #servizi { padding-top: 90px !important; padding-bottom: 80px !important; }
+  .m-svc { grid-template-columns: 1fr !important; padding: 24px 2px !important; }
+  .m-svc > span:first-child > span:first-child { font-size: 7.6vw !important; }
+  .m-svc > span:last-child { display: none !important; }
+
+  /* ---------- Home: projects ---------- */
+  #progetti { padding-bottom: 90px !important; }
+  #progetti > div:last-child { gap: 64px !important; }
+  .m-proj { grid-template-columns: 1fr !important; gap: 22px !important; }
+  .m-proj > div:first-child { position: static !important; }
+  .m-proj [data-ptrack] > div { height: 300px !important; margin-right: 10px !important; }
+
+  /* ---------- Home: contacts ---------- */
+  #contatti { padding-top: 120px !important; padding-bottom: 40px !important; }
+  #contatti [data-iris] { width: 78vw !important; right: -24vw !important; top: 40px !important; transform: none !important; opacity: .4 !important; }
+  .m-cta { font-size: 7.8vw !important; }
+  #contatti div:has(> a[href*="instagram"]) { gap: 10px 22px !important; }
+
+  /* ---------- Video ---------- */
+  .m-frame { inset: 70px 10px 24px !important; }
+  header[data-screen-label="Video hero"] .rs-corners { inset: 84px 22px 38px !important; }
+  header[data-screen-label="Video hero"] .rs-cross { display: none; }
+  .m-vhud { top: 98px !important; left: 34px !important; right: 34px !important; }
+  header[data-screen-label="Video hero"] h1 { font-size: 15.5vw !important; }
+  .m-clips { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 28px 12px !important; padding: 56px 16px 90px !important; }
+  .m-clip { grid-column: auto !important; margin-top: 0 !important; }
+  .m-clip.m-wide { grid-column: 1 / -1 !important; }
+  .m-clip > div:last-child { flex-direction: column !important; gap: 2px !important; }
+  .m-clip > div:last-child > span:first-child { font-size: 14px !important; }
+
+  /* ---------- Fotografia ---------- */
+  header[data-screen-label="Fotografia hero"] { padding-top: 110px !important; padding-bottom: 32px !important; gap: 18px !important; }
+  header[data-screen-label="Fotografia hero"] h1 { font-size: 7.6vw !important; }
+  div[data-screen-label="Filtri"] { padding: 0 20px 24px !important; }
+  section[data-screen-label="Griglia"] { columns: 2 !important; column-gap: 8px !important; padding: 0 12px 90px !important; }
+  section[data-screen-label="Griglia"] figure { margin-bottom: 8px !important; }
+  section[data-screen-label="Griglia"] figcaption { display: none !important; }
+  section[data-screen-label="Foto editing"] { padding: 0 16px 90px !important; }
+
+  /* ---------- Social ---------- */
+  header[data-screen-label="Social hero"] { padding-top: 92px !important; gap: 16px !important; }
+  header[data-screen-label="Social hero"] h1 { font-size: 15vw !important; }
+  header[data-screen-label="Social hero"] p { font-size: 15px !important; }
+  section[data-screen-label="Cosa faccio"] { padding: 56px 16px 90px !important; }
+  .rs-orbit { width: 640px !important; height: 640px !important; margin: -320px 0 0 -320px !important; }
+
+  /* ---------- Editing ---------- */
+  header[data-screen-label="Editing hero"] { padding-top: 110px !important; padding-bottom: 36px !important; gap: 18px !important; }
+  header[data-screen-label="Editing hero"] h1 { font-size: 12vw !important; }
+  [data-wave] { padding: 0 16px !important; height: 40px !important; margin-bottom: 28px !important; gap: 2px !important; }
+  [data-wave] i:nth-child(2n) { display: none; }
+  section[data-screen-label="Prima / dopo"] { padding: 0 16px 64px !important; }
+  section[data-screen-label="Prima / dopo"] > div:first-child { aspect-ratio: 4 / 3 !important; }
+  section[data-screen-label="Esempi"] { padding: 0 16px 90px !important; }
+}

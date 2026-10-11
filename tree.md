@@ -52,6 +52,9 @@
 │       └── Japan-9.jpg
 ├── assets/
 │   ├── photos/
+│   │   ├── Photo editing/
+│   │   │   ├── post-pagoda.jpg
+│   │   │   └── pre-pagoda.jpeg
 │   │   ├── events/
 │   │   │   ├── dsc00026.jpg
 │   │   │   ├── dsc00038.jpg
@@ -117,11 +120,15 @@
 ├── componenti/
 │   └── LavoriSelezionati.dc.html
 ├── .gitignore
+├── .thumbnail
 ├── Editing.dc.html
 ├── Fotografia.dc.html
 ├── Home.dc.html
 ├── README.md
 ├── Social.dc.html
 ├── Video.dc.html
+├── motion.css
+├── motion.js
+├── responsive.css
 ├── support.js
 └── tree.md

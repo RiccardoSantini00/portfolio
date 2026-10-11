@@ -15,9 +15,11 @@
 <x-dc>
 <helmet>
 <title>Lavori selezionati — componente</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&amp;family=Manrope:wght@400;500;600&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&amp;f[]=satoshi@400,500,700&amp;display=swap" rel="stylesheet">
 <style>
-html,body{margin:0;background:#16181b;color:#ece9e2;font-family:Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+html,body{margin:0;background:#16181b;color:#ece9e2;font-family:Satoshi,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 a{color:#ece9e2;text-decoration:none}a:hover{color:#4ecdc0}
 @keyframes scrollUp{to{transform:translateY(-50%)}}
 </style>
@@ -26,7 +28,7 @@ a{color:#ece9e2;text-decoration:none}a:hover{color:#4ecdc0}
 
 <section id="lavori" data-screen-label="Lavori" style="padding:120px 0 80px;max-width:1400px;margin:0 auto">
   <div style="display:flex;justify-content:space-between;align-items:end;gap:24px;margin:0 32px 48px;flex-wrap:wrap">
-    <h2 style="margin:0;font-family:Syne,sans-serif;font-weight:800;font-size:clamp(32px,4.5vw,64px);line-height:.95;letter-spacing:-.03em;text-transform:uppercase">Lavori <span style="color:#4ecdc0">selezionati</span></h2>
+    <h2 style="margin:0;font-family:'Clash Display',sans-serif;font-weight:800;font-size:clamp(32px,4.5vw,64px);line-height:.95;letter-spacing:-.03em;text-transform:uppercase">Lavori <span style="color:#4ecdc0">selezionati</span></h2>
     <a href="../Fotografia.dc.html" style="font-size:14px;letter-spacing:.04em;border-bottom:1px solid #4ecdc0;padding-bottom:4px;color:#ece9e2;transition:color .3s" style-hover="color:#4ecdc0">Vedi tutto →</a>
   </div>
   <div data-reveal="fast" style="height:min(82vh,900px);overflow:hidden;margin:0 32px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 12%,#000 88%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 12%,#000 88%,transparent 100%);opacity:0;transition:opacity .6s ease">
