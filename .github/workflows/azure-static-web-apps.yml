@@ -1,0 +1,39 @@
+name: Deploy su Azure Static Web Apps
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: swa-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Pubblica il portfolio
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: false
+          submodules: false
+
+      - name: Controlla che le pagine ci siano
+        run: |
+          for f in index.html Fotografia.dc.html Video.dc.html \
+                   Editing.dc.html Social.dc.html staticwebapp.config.json; do
+            [ -f "$f" ] || { echo "::error::manca $f"; exit 1; }
+          done
+          echo "Peso totale: $(du -sh --exclude=.git . | cut -f1)"
+
+      - name: Deploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: upload
+          app_location: "/"
+          api_location: ""
+          output_location: ""
+          skip_app_build: true
