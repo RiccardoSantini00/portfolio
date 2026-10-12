@@ -25,9 +25,9 @@ a{color:#ece9e2;text-decoration:none}a:hover{color:#4ecdc0}
 </helmet>
 <div ref="{{ rootRef }}" style="background:#16181b;color:#ece9e2;min-height:100vh;overflow-x:clip">
 <nav style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:18px 32px;background:linear-gradient(180deg,rgba(22,24,27,.85),rgba(22,24,27,0));backdrop-filter:blur(6px)">
-  <a href="Home.dc.html" style="font-family:'Clash Display',sans-serif;font-weight:800;font-size:15px;letter-spacing:.12em;text-transform:uppercase">RS</a>
+  <a href="index.html" style="font-family:'Clash Display',sans-serif;font-weight:800;font-size:15px;letter-spacing:.12em;text-transform:uppercase">RS</a>
   <div style="display:flex;gap:28px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:500;white-space:nowrap">
-    <a href="Home.dc.html#servizi" style="color:rgba(236,233,226,.75);transition:color .3s" style-hover="color:#4ecdc0">← Servizi</a>
+    <a href="index.html#servizi" style="color:rgba(236,233,226,.75);transition:color .3s" style-hover="color:#4ecdc0">← Servizi</a>
     <a href="mailto:me@riccardosantini.com" style="color:rgba(236,233,226,.75);transition:color .3s" style-hover="color:#4ecdc0">Contatti</a>
   </div>
 </nav>
@@ -66,6 +66,33 @@ a{color:#ece9e2;text-decoration:none}a:hover{color:#4ecdc0}
   </sc-for>
 </section>
 
+<section data-screen-label="Video editing" style="max-width:1400px;margin:0 auto;padding:0 32px 160px">
+  <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px 64px;align-items:end;margin-bottom:36px">
+    <h2 style="margin:0;font-family:'Clash Display',sans-serif;font-weight:800;font-size:clamp(32px,4.5vw,64px);line-height:.95;letter-spacing:-.03em;text-transform:uppercase">Video <span style="color:#4ecdc0">editing</span></h2>
+    <p style="margin:0;flex:1 1 320px;font-size:16px;line-height:1.6;color:rgba(236,233,226,.75);max-width:48ch">Montaggio, color correction e sound design: dal girato grezzo al contenuto finito.</p>
+  </div>
+  <div data-wave="110" aria-hidden="true" style="margin:0 0 48px;opacity:.85"></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px">
+    <sc-for list="{{ works }}" as="w" hint-placeholder-count="3">
+      <a href="{{ w.src }}" onClick="{{ w.open }}" data-cursor="Play" style="display:flex;flex-direction:column;gap:14px;color:#ece9e2;transition:transform .5s cubic-bezier(.2,.7,.2,1)" style-hover="transform:translateY(-6px);color:#ece9e2">
+        <div data-tilt="7" style="position:relative;aspect-ratio:16/9;border-radius:6px;overflow:hidden;background:repeating-linear-gradient(135deg,#272b30 0 12px,#20242a 12px 24px)">
+          <video data-auto="" src="{{ w.src }}" data-poster="{{ w.poster }}" preload="none" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video>
+          <div style="position:absolute;left:0;right:0;bottom:0;height:34px;display:flex;align-items:center;gap:3px;padding:0 12px;background:rgba(22,24,27,.7)">
+            <sc-for list="{{ w.bars }}" as="b" hint-placeholder-count="12"><span style="height:10px;flex:1;background:rgba(236,233,226,.35);border-radius:2px;width:{{ b.w }}"></span></sc-for>
+            <span class="rs-playhead"></span>
+          </div>
+          <span style="position:absolute;right:12px;top:10px;font-family:'JetBrains Mono',monospace;font-size:11px;opacity:.6">{{ w.dur }}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;gap:12px">
+          <span style="font-family:'Clash Display',sans-serif;font-weight:700;font-size:17px">{{ w.title }}</span>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:11px;opacity:.5;white-space:nowrap">{{ w.kind }}</span>
+        </div>
+        <p style="margin:0;font-size:14px;line-height:1.55;opacity:.7">{{ w.desc }}</p>
+      </a>
+    </sc-for>
+  </div>
+</section>
+
 <sc-if value="{{ player }}">
   <div onClick="{{ close }}" style="position:fixed;inset:0;z-index:100;background:rgba(10,11,13,.92);backdrop-filter:blur(8px);display:grid;place-items:center;padding:56px 24px;animation:rise .4s cubic-bezier(.2,.7,.2,1) both">
     <video data-lightbox="" data-src="{{ player }}" controls="{{ yes }}" onClick="{{ stop }}" style="max-width:100%;max-height:100%;border-radius:6px;background:#000;box-shadow:0 40px 120px -30px rgba(0,0,0,.9)"></video>
@@ -74,7 +101,7 @@ a{color:#ece9e2;text-decoration:none}a:hover{color:#4ecdc0}
 </sc-if>
 
 <footer class="m-foot" style="padding:60px 32px;border-top:1px solid rgba(236,233,226,.12);display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;max-width:1400px;margin:0 auto;font-size:14px;opacity:.7">
-  <a href="Home.dc.html#servizi">← Tutti i servizi</a>
+  <a href="index.html#servizi">← Tutti i servizi</a>
   <a href="mailto:me@riccardosantini.com?subject=Video">Richiedi un preventivo →</a>
 </footer>
 </div>
@@ -112,7 +139,13 @@ class Component extends DCLogic {
       {title:'Vienna — Hyperlapse',kind:'viaggio',dur:'00:09',ar:'9/16',col:'3 / span 3',mt:'60px',...vid('vienna-hyperlapse')},
       {title:'AI Conf 2026 — Reel',kind:'evento',dur:'00:56',ar:'9/16',col:'8 / span 3',mt:'0',...vid('ai-conf-reel')}
     ].map(c=>({...c,open:show(c.src),cls:c.ar==='16/9'?'m-clip m-wide':'m-clip'}));
-    return {rootRef:this.rootRef,clips,player:this.state.player,yes:true,
+    // Editing work: each card carries a fake timeline whose bar widths vary per clip.
+    const works=[
+      {...vid('ai-conf-26'),title:'AI Conf 2026 — Aftermovie',kind:'montaggio',dur:'01:30',desc:'Ritmo serrato sul talk e sul networking, sincronizzato alla traccia audio.',bars:[1,2,1,3,2,1,2,3,1,2,1,2]},
+      {...vid('reel-theforkawards'),title:'Blinkoo — Reel',kind:'color + sound',dur:'00:44',desc:'Grade caldo coerente con il brand, sound design dei cut.',bars:[2,1,3,1,2,2,1,3,2,1,2,1]},
+      {...vid('videocreators'),title:'Improove — Brand film',kind:'montaggio',dur:'01:23',desc:'Montaggio, grafiche e sound design per il lancio del prodotto.',bars:[1,3,2,2,1,3,1,2,2,1,3,2]}
+    ].map(w=>({...w,open:show(w.src),bars:w.bars.map(n=>({w:n*8+'%'}))}));
+    return {rootRef:this.rootRef,clips,works,player:this.state.player,yes:true,
       playReel:show('assets/videos/showreel.mp4'),
       close:()=>this.setState({player:null}), stop:e=>e.stopPropagation()};
   }

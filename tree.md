@@ -121,12 +121,11 @@
 │   └── LavoriSelezionati.dc.html
 ├── .gitignore
 ├── .thumbnail
-├── Editing.dc.html
 ├── Fotografia.dc.html
-├── Home.dc.html
 ├── README.md
 ├── Social.dc.html
 ├── Video.dc.html
+├── index.html
 ├── motion.css
 ├── motion.js
 ├── responsive.css

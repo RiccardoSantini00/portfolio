@@ -86,12 +86,8 @@
   section[data-screen-label="Cosa faccio"] { padding: 56px 16px 90px !important; }
   .rs-orbit { width: 640px !important; height: 640px !important; margin: -320px 0 0 -320px !important; }
 
-  /* ---------- Editing ---------- */
-  header[data-screen-label="Editing hero"] { padding-top: 110px !important; padding-bottom: 36px !important; gap: 18px !important; }
-  header[data-screen-label="Editing hero"] h1 { font-size: 12vw !important; }
-  [data-wave] { padding: 0 16px !important; height: 40px !important; margin-bottom: 28px !important; gap: 2px !important; }
+  /* ---------- Video: editing section ---------- */
+  section[data-screen-label="Video editing"] { padding: 0 16px 90px !important; }
+  [data-wave] { height: 40px !important; margin-bottom: 28px !important; gap: 2px !important; }
   [data-wave] i:nth-child(2n) { display: none; }
-  section[data-screen-label="Prima / dopo"] { padding: 0 16px 64px !important; }
-  section[data-screen-label="Prima / dopo"] > div:first-child { aspect-ratio: 4 / 3 !important; }
-  section[data-screen-label="Esempi"] { padding: 0 16px 90px !important; }
 }

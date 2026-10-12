@@ -15,7 +15,9 @@
     data-iris            empty element becomes a 3D camera aperture driven by scroll
     data-wave="N"        empty element becomes an animated N-bar waveform
 
-  Global extras: page-transition curtain, scroll progress bar, film grain, cursor.
+  Global extras: page-transition curtain, scroll progress bar, film grain, cursor,
+  and a mail chooser — every mailto: link opens a panel to pick Gmail, Outlook,
+  the device's mail app, or copy the address, instead of launching the mail app.
 */
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -52,12 +54,78 @@
       if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || a.target === '_blank' || a.hasAttribute('download')) return;
       const url = new URL(a.href, location.href);
       const samePage = url.pathname === location.pathname;
-      if (url.origin !== location.origin || !url.pathname.endsWith('.dc.html') || samePage) return;
+      if (url.origin !== location.origin || !url.pathname.endsWith('.html') || samePage) return;
       e.preventDefault();
       document.documentElement.classList.add('rs-leave');
       setTimeout(() => { location.href = url.href; }, 560);
     });
     addEventListener('pageshow', e => { if (e.persisted) document.documentElement.classList.remove('rs-leave'); });
+  }
+
+  /* ---------- Mail chooser ---------- */
+  // mailto: links ask the visitor where to write from instead of launching the default mail app.
+  function wireMailChooser() {
+    document.addEventListener('click', e => {
+      const a = e.target.closest('a[href^="mailto:"]');
+      if (!a || a.closest('.rs-mail') || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey) return;
+      e.preventDefault();
+      openMailChooser(a.href, a);
+    });
+  }
+
+  function mailLinks(href) {
+    const url = new URL(href), to = decodeURIComponent(url.pathname), subject = url.searchParams.get('subject') || '';
+    const enc = encodeURIComponent;
+    return {
+      to, mailto: href,
+      gmail: 'https://mail.google.com/mail/?view=cm&fs=1&to=' + enc(to) + (subject ? '&su=' + enc(subject) : ''),
+      outlook: 'https://outlook.live.com/mail/0/deeplink/compose?to=' + enc(to) + (subject ? '&subject=' + enc(subject) : '')
+    };
+  }
+
+  function buildMailPanel(links) {
+    const panel = el('div', 'rs-mail',
+      '<div class="rs-mail-box" role="dialog" aria-modal="true" aria-labelledby="rs-mail-t">' +
+        '<button class="rs-mail-x" type="button" aria-label="Chiudi">✕</button>' +
+        '<p class="rs-mail-k">Scrivimi</p>' +
+        '<p class="rs-mail-t" id="rs-mail-t">Da dove vuoi scrivere?</p>' +
+        '<p class="rs-mail-addr"></p>' +
+        '<div class="rs-mail-opts">' +
+          '<a data-mail="gmail" target="_blank" rel="noopener">Gmail <span>↗</span></a>' +
+          '<a data-mail="outlook" target="_blank" rel="noopener">Outlook <span>↗</span></a>' +
+          '<a data-mail="mailto">App di posta <span>→</span></a>' +
+          '<button type="button" data-copy>Copia indirizzo <span>⧉</span></button>' +
+        '</div>' +
+      '</div>');
+    panel.querySelector('.rs-mail-addr').textContent = links.to;
+    panel.querySelectorAll('[data-mail]').forEach(a => { a.href = links[a.dataset.mail]; });
+    return panel;
+  }
+
+  function openMailChooser(href, trigger) {
+    const links = mailLinks(href), panel = buildMailPanel(links);
+    const onKey = e => { if (e.key === 'Escape') close(); };
+    const close = () => {
+      removeEventListener('keydown', onKey);
+      panel.classList.remove('is-open');
+      setTimeout(() => panel.remove(), 300);
+      trigger.focus({ preventScroll: true });
+    };
+    panel.addEventListener('click', e => {
+      if (e.target === panel || e.target.closest('.rs-mail-x')) return close();
+      if (e.target.closest('[data-copy]')) return copyAddress(links.to, e.target.closest('[data-copy]'));
+      if (e.target.closest('[data-mail]')) setTimeout(close, 150);
+    });
+    addEventListener('keydown', onKey);
+    document.body.append(panel);
+    requestAnimationFrame(() => panel.classList.add('is-open'));
+    panel.querySelector('[data-mail]').focus({ preventScroll: true });
+  }
+
+  function copyAddress(address, btn) {
+    const done = ok => { btn.firstChild.textContent = ok ? 'Indirizzo copiato ' : 'Copia non riuscita '; };
+    if (!navigator.clipboard) return done(false);
+    navigator.clipboard.writeText(address).then(() => done(true), () => done(false));
   }
 
   /* ---------- Cursor ---------- */
@@ -228,7 +296,7 @@
   addEventListener('pointermove', e => { mouse.x = e.clientX; mouse.y = e.clientY; }, { passive: true });
 
   function start() {
-    buildChrome(); scan();
+    buildChrome(); wireMailChooser(); scan();
     // React renders after the CDN loads; watch for new nodes (childList only — cheap on re-renders).
     new MutationObserver(queueScan).observe(document.body, { childList: true, subtree: true });
   }
