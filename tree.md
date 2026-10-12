@@ -125,12 +125,14 @@
 ├── .gitignore
 ├── .thumbnail
 ├── Fotografia.dc.html
+├── Progetti.dc.html
 ├── README.md
 ├── Social.dc.html
 ├── Video.dc.html
 ├── index.html
 ├── motion.css
 ├── motion.js
+├── projects.js
 ├── responsive.css
 ├── skills.js
 ├── staticwebapp.config.json

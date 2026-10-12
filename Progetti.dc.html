@@ -1,0 +1,70 @@
+<!--
+  Progetti.dc.html — the full projects page, reached from the Home carousel
+  ("Esplora tutti i progetti" or a single card, which links to #<slug>).
+  For now it is a placeholder: same chrome as the service pages and an
+  "in arrivo" notice. The project data already lives in projects.js.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./motion.css?v=20261012b">
+<link rel="stylesheet" href="./responsive.css?v=20261012b">
+<script src="./motion.js?v=20261012b"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Progetti — Riccardo Santini</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&amp;f[]=satoshi@400,500,700&amp;display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;background:#16181b;color:#ece9e2;font-family:Satoshi,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#ece9e2;text-decoration:none}a:hover{color:#4ecdc0}
+@keyframes rise{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+</style>
+</helmet>
+<div style="background:#16181b;color:#ece9e2;min-height:100vh;overflow-x:clip;display:flex;flex-direction:column">
+<nav style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:18px 32px;background:linear-gradient(180deg,rgba(22,24,27,.85),rgba(22,24,27,0));backdrop-filter:blur(6px)">
+  <a href="index.html" style="font-family:'Clash Display',sans-serif;font-weight:800;font-size:15px;letter-spacing:.12em;text-transform:uppercase">RS</a>
+  <div style="display:flex;gap:28px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;font-weight:500;white-space:nowrap">
+    <a href="index.html#progetti" style="color:rgba(236,233,226,.75);transition:color .3s" style-hover="color:#4ecdc0">← Home</a>
+    <a href="mailto:me@riccardosantini.com" style="color:rgba(236,233,226,.75);transition:color .3s" style-hover="color:#4ecdc0">Contatti</a>
+  </div>
+</nav>
+
+<header data-screen-label="Progetti hero" style="padding:160px 32px 60px;max-width:1400px;width:100%;box-sizing:border-box;margin:0 auto;display:flex;flex-direction:column;gap:28px;animation:rise 1s cubic-bezier(.2,.7,.2,1) both">
+  <div>
+    <div data-scramble="" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:#4ecdc0;margin-bottom:20px">Portfolio</div>
+    <h1 style="margin:0;font-family:'Clash Display',sans-serif;font-weight:800;font-size:clamp(48px,9vw,150px);line-height:.9;letter-spacing:-.04em;text-transform:uppercase">Progetti</h1>
+  </div>
+  <p style="margin:0;font-size:17px;line-height:1.6;color:rgba(236,233,226,.78);max-width:52ch">La raccolta completa dei progetti, con i lavori raccontati uno per uno.</p>
+</header>
+
+<section data-screen-label="In arrivo" style="flex:1;max-width:1400px;width:100%;box-sizing:border-box;margin:0 auto;padding:0 32px 140px">
+  <div style="position:relative;min-height:320px;border-radius:8px;border:1px dashed rgba(236,233,226,.18);display:grid;place-items:center;text-align:center;padding:48px 24px">
+    <div class="rs-corners" style="inset:14px"></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:18px">
+      <span class="rs-hud" style="display:flex;gap:10px;align-items:center"><span class="rs-blink" style="width:8px;height:8px;border-radius:50%;background:#4ecdc0;box-shadow:0 0 12px #4ecdc0"></span>Standby</span>
+      <span style="font-family:'Clash Display',sans-serif;font-weight:700;font-size:clamp(24px,3vw,40px);line-height:1.05;text-transform:uppercase;letter-spacing:-.02em;word-spacing:.12em">Pagina in arrivo</span>
+      <a href="index.html#progetti" class="rs-explore">← Torna ai progetti in Home</a>
+    </div>
+  </div>
+</section>
+
+<footer class="m-foot" style="padding:60px 32px;border-top:1px solid rgba(236,233,226,.12);display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;max-width:1400px;width:100%;box-sizing:border-box;margin:0 auto;font-size:14px;opacity:.7">
+  <a href="index.html">← Home</a>
+  <a href="mailto:me@riccardosantini.com?subject=Collaborazione">Parliamone insieme →</a>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals(){ return {}; }
+}
+</script>
+</body>
+</html>

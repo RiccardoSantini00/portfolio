@@ -56,10 +56,9 @@
 
   /* ---------- Home: projects ---------- */
   #progetti { padding-bottom: 90px !important; }
-  #progetti > div:last-child { gap: 64px !important; }
-  .m-proj { grid-template-columns: 1fr !important; gap: 22px !important; }
-  .m-proj > div:first-child { position: static !important; }
-  .m-proj [data-ptrack] > div { height: 300px !important; margin-right: 10px !important; }
+  .rs-pcard { width: 290px; margin-right: 16px; }
+  .rs-pmosaic { height: 210px; }
+  .rs-pcard-meta h3 { font-size: 21px; }
 
   /* ---------- Home: contacts ---------- */
   #contatti { padding-top: 120px !important; padding-bottom: 40px !important; }

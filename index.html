@@ -3,11 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./skills.js?v=20261012"></script>
+<script src="./skills.js?v=20261012b"></script>
+<script src="./projects.js?v=20261012b"></script>
 <script src="./support.js"></script>
-<link rel="stylesheet" href="./motion.css?v=20261012">
-<link rel="stylesheet" href="./responsive.css?v=20261012">
-<script src="./motion.js?v=20261012"></script>
+<link rel="stylesheet" href="./motion.css?v=20261012b">
+<link rel="stylesheet" href="./responsive.css?v=20261012b">
+<script src="./motion.js?v=20261012b"></script>
 </head>
 <body>
 <x-dc>
@@ -138,34 +139,31 @@ a{color:#ece9e2;text-decoration:none}a:hover{color:#4ecdc0}
   </div>
 </section>
 
-<!-- PROGETTI -->
-<section id="progetti" data-screen-label="Progetti" class="m-pad" style="padding:60px 32px 160px;max-width:1200px;margin:0 auto">
-  <div data-scramble="" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:#4ecdc0;margin-bottom:40px">Progetti</div>
-  <div style="display:flex;flex-direction:column;gap:96px">
-    <sc-for list="{{ projects }}" as="p" hint-placeholder-count="3">
-      <article data-reveal="" class="m-proj" style="opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:40px;align-items:start">
-        <div style="position:sticky;top:120px;display:flex;flex-direction:column;gap:14px">
-          <h3 style="margin:0;font-family:'Clash Display',sans-serif;font-weight:800;font-size:clamp(24px,2.6vw,40px);line-height:1;letter-spacing:-.03em;text-transform:uppercase;overflow-wrap:anywhere">{{ p.name }}</h3>
-          <div style="display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-size:13px;font-family:'JetBrains Mono',monospace">
-            <span style="color:rgba(236,233,226,.45)">Ruolo</span><span style="color: #4ecdc0; width: 227px; height: 16px">Videomaker &amp; Content Creator</span>
-            <span style="color:rgba(236,233,226,.45)">Categoria</span><span>{{ p.cat }}</span>
-            <span style="color:rgba(236,233,226,.45)">Anno</span><span>{{ p.year }}</span>
+<!-- PROGETTI: endless right-to-left card carousel (pauses on hover); cards and "Esplora" lead to Progetti.dc.html. Data in projects.js -->
+<section id="progetti" data-screen-label="Progetti" style="padding:60px 0 160px">
+  <div class="m-pad" style="max-width:1200px;margin:0 auto 40px;padding:0 32px;display:flex;justify-content:space-between;align-items:center;gap:20px 32px;flex-wrap:wrap">
+    <div data-scramble="" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:#4ecdc0">Progetti</div>
+    <a href="Progetti.dc.html" class="rs-explore">Esplora tutti i progetti <span>→</span></a>
+  </div>
+  <div class="rs-projrail">
+    <div class="rs-projtrack" data-projtrack="">
+      <sc-for list="{{ projectCards }}" as="p" hint-placeholder-count="6">
+        <a href="{{ p.href }}" class="rs-pcard" data-cursor="Apri" data-dup="{{ p.dup }}" aria-hidden="{{ p.hidden }}" tabindex="{{ p.tab }}" aria-label="{{ p.label }}">
+          <div class="{{ p.mosaic }}">
+            <sc-for list="{{ p.media }}" as="m" hint-placeholder-count="3">
+              <div class="rs-ptile">
+                <sc-if value="{{ m.isVideo }}"><video data-poster="{{ m.poster }}" src="{{ m.src }}" preload="none"></video><span class="rs-ptile-play" aria-hidden="true">▶</span></sc-if>
+                <sc-if value="{{ m.isPhoto }}"><img src="{{ m.src }}" alt="{{ m.alt }}" loading="lazy" decoding="async"></sc-if>
+              </div>
+            </sc-for>
           </div>
-          <p style="margin:6px 0 0;font-size:15px;line-height:1.6;color:rgba(236,233,226,.75);max-width:40ch">{{ p.desc }}</p>
-        </div>
-        <div class="rs-pcarousel">
-          <div data-ptrack="">
-          <sc-for list="{{ p.items }}" as="it" hint-placeholder-count="3">
-            <div data-tilt="7" data-dup="{{ it.dup }}" style="position:relative;flex:none;height:clamp(260px,28vw,380px);aspect-ratio:{{ it.ar }};margin-right:12px;overflow:hidden;border-radius:6px;background:repeating-linear-gradient(135deg,#272b30 0 12px,#20242a 12px 24px)">
-              <video data-auto="" src="{{ it.video }}" data-poster="{{ it.poster }}" preload="none" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video>
-              <div style="position:absolute;inset:auto 0 0 0;height:40%;background:linear-gradient(180deg,rgba(22,24,27,0),rgba(22,24,27,.6));pointer-events:none"></div>
-              <span style="position:absolute;left:12px;bottom:10px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;color:rgba(236,233,226,.85)">{{ it.label }}</span>
-            </div>
-          </sc-for>
+          <div class="rs-pcard-meta">
+            <h3>{{ p.name }}</h3>
+            <div class="rs-pcard-tags"><span class="is-role">{{ p.role }}</span><span>{{ p.cat }}</span><span>{{ p.year }}</span></div>
           </div>
-        </div>
-      </article>
-    </sc-for>
+        </a>
+      </sc-for>
+    </div>
   </div>
 </section>
 
@@ -198,8 +196,8 @@ class Component extends DCLogic {
       this.reveal();
     }); };
     addEventListener('scroll',this.onScroll,{passive:true}); addEventListener('resize',this.onScroll);
-    this.onScroll(); this.wireVideos(); this.sizeCarousels();
-    this.onResize=()=>this.sizeCarousels(); addEventListener('resize',this.onResize);
+    this.onScroll(); this.wireVideos(); this.wireCards(); this.sizeProjectTrack();
+    this.onResize=()=>this.sizeProjectTrack(); addEventListener('resize',this.onResize);
     this.scrollToHash();
     this.onHash=()=>this.clearHash(); addEventListener('hashchange',this.onHash);
   }
@@ -213,14 +211,19 @@ class Component extends DCLogic {
   }
   // Drop the #anchor once used, so a reload (Ctrl+R) doesn't jump back to that section.
   clearHash(){ if(location.hash) history.replaceState(history.state,'',location.pathname+location.search); }
-  componentDidUpdate(){ this.reveal(); this.wireVideos(); this.sizeCarousels(); }
-  // A project carousel scrolls only when its items are wider than the space beside the text.
-  sizeCarousels(){
-    document.querySelectorAll('[data-ptrack]').forEach(t=>{
-      const own=[...t.children].filter(c=>!c.hasAttribute('data-dup'));
-      const setW=own.reduce((w,c)=>w+c.getBoundingClientRect().width+12,0);
-      if(setW>t.parentElement.clientWidth+1){ t.dataset.moving='1'; t.style.animationDuration=(setW/45).toFixed(1)+'s'; }
-      else delete t.dataset.moving;
+  componentDidUpdate(){ this.reveal(); this.wireVideos(); this.wireCards(); this.sizeProjectTrack(); }
+  // The track holds the card set twice and slides by half its width, so the loop is seamless; constant speed in px/s.
+  sizeProjectTrack(){
+    const t=document.querySelector('[data-projtrack]'); if(!t) return;
+    t.style.setProperty('--rs-dur',(t.scrollWidth/2/40).toFixed(1)+'s');
+  }
+  // Card videos show only their poster; they play while the pointer is on the card, so the Home stays light.
+  wireCards(){
+    document.querySelectorAll('.rs-pcard').forEach(card=>{ if(card.dataset.wired) return; card.dataset.wired='1';
+      const vids=[...card.querySelectorAll('video')];
+      vids.forEach(v=>{ v.poster=v.dataset.poster; v.muted=true; v.loop=true; v.playsInline=true; });
+      card.addEventListener('mouseenter',()=>vids.forEach(v=>{ v.preload='auto'; v.play().catch(()=>{}); }));
+      card.addEventListener('mouseleave',()=>vids.forEach(v=>v.pause()));
     });
   }
   // Muted looping previews: play only while on screen, pause otherwise.
@@ -238,6 +241,18 @@ class Component extends DCLogic {
     if(subs.length>4) pills.push({text:'+'+(subs.length-4),cls:'rs-pill is-more'});
     return pills;
   }
+  // Cards for the carousel: the set is repeated until a half holds at least 6 cards, then doubled for the loop.
+  // Only the first set is reachable by keyboard and screen readers; the copies are decoration.
+  projectCards(projects){
+    const reps=Math.max(1,Math.ceil(6/projects.length)), cards=[];
+    for(let r=0;r<reps*2;r++) projects.forEach(p=>cards.push(this.projectCard(p,r>0)));
+    return cards;
+  }
+  projectCard(p,copy){
+    const media=p.media.slice(0,3).map(m=>({...m,isVideo:m.kind==='video',isPhoto:m.kind==='photo'}));
+    return {...p,media,href:'Progetti.dc.html#'+p.slug,mosaic:'rs-pmosaic is-'+media.length,label:p.name+' — '+p.role,
+      dup:copy?'1':undefined,hidden:copy?'true':'false',tab:copy?'-1':'0'};
+  }
   renderVals(){
     const S=window.RS_SKILLS;
     const services=[
@@ -246,16 +261,9 @@ class Component extends DCLogic {
       {key:'social',name:'Social media',desc:'Contenuti, reel e gestione dei canali.',href:'Social.dc.html'}
     ].map(sv=>({...sv,pills:this.servicePills(S.subsOf(sv.key))}));
     const competences=S.competences.map((c,i)=>({name:c.name,num:String(i+1).padStart(2,'0')}));
-    const v=n=>({video:'assets/videos/'+n+'.mp4',poster:'assets/posters/'+n+'.jpg'}), full=undefined, one=undefined;
-    const projects=[
-      {name:'Blinkoo',role:'Social media manager',cat:'Social media',year:'2024 — 2025',desc:'Gestione dei canali, produzione di reel e foto prodotto, pianificazione editoriale mensile.',items:[{label:'reel · app',ar:'9/16',span:one,...v('reel-uploads')},{label:'reel · thefork awards',ar:'9/16',span:one,...v('reel-theforkawards')},{label:'reel · milano gratis',ar:'9/16',span:one,...v('reel-milanogratis')}]},
-      {name:'AI Conf',role:'Foto & video evento',cat:'Eventi',year:'2026',desc:'Copertura fotografica e video dell\'intera giornata: talk, networking, aftermovie.',items:[{label:'aftermovie',ar:'16/9',span:full,...v('ai-conf-26')},{label:'reel · evento',ar:'9/16',span:one,...v('ai-conf-reel')},{label:'reel · anticipazione',ar:'4/5',span:one,...v('reelanticipazione-aiconf2026')}]},
-      {name:'Improove',role:'Videomaking',cat:'Brand video',year:'2025',desc:'Ideazione e realizzazione di video brand e contenuti per il lancio del prodotto.',items:[{label:'brand film',ar:'16/9',span:full,...v('videocreators')}]}
-    ];
+    const projectCards=this.projectCards(window.RS_PROJECTS);
     const words=['Fotografia','Video','Editing','Social media','Eventi','Viaggi'], marquee=words.concat(words);
-    // Each list is doubled so the carousel can loop seamlessly; copies stay hidden unless it moves.
-    projects.forEach(p=>{ p.items=p.items.concat(p.items.map(it=>({...it,dup:'1'}))); });
-    return {rootRef:this.rootRef,services,projects,marquee,competences,
+    return {rootRef:this.rootRef,services,projectCards,marquee,competences,
       softwareList:S.software.join(','),softwareLabel:'Software: '+S.software.join(', ')};
   }
 }
