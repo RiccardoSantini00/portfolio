@@ -1,4 +1,7 @@
 ﻿.
+├── .github/
+│   └── workflows/
+│       └── azure-static-web-apps.yml
 ├── 01_Showreel & Curriculum/
 │   ├── Curriculum.pdf
 │   └── Showreel.mp4
@@ -129,5 +132,6 @@
 ├── motion.css
 ├── motion.js
 ├── responsive.css
+├── staticwebapp.config.json
 ├── support.js
 └── tree.md

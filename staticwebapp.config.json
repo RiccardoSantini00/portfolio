@@ -5,7 +5,7 @@
     { "route": "/Home.dc.html", "redirect": "/", "statusCode": 301 },
     { "route": "/fotografia", "rewrite": "/Fotografia.dc.html" },
     { "route": "/video", "rewrite": "/Video.dc.html" },
-    { "route": "/editing", "rewrite": "/Editing.dc.html" },
+    { "route": "/editing", "redirect": "/video", "statusCode": 301 },
     { "route": "/social", "rewrite": "/Social.dc.html" },
     { "route": "/cv", "redirect": "/assets/cv-riccardo-santini.pdf", "statusCode": 302 },
 
