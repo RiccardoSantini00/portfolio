@@ -3,10 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./skills.js?v=20261012"></script>
 <script src="./support.js"></script>
-<link rel="stylesheet" href="./motion.css">
-<link rel="stylesheet" href="./responsive.css">
-<script src="./motion.js"></script>
+<link rel="stylesheet" href="./motion.css?v=20261012">
+<link rel="stylesheet" href="./responsive.css?v=20261012">
+<script src="./motion.js?v=20261012"></script>
 </head>
 <body>
 <x-dc>
@@ -59,6 +60,11 @@ a{color:#ece9e2;text-decoration:none}a:hover{color:#4ecdc0}
 </section>
 
 <section data-screen-label="Cosa faccio" style="max-width:1400px;margin:0 auto;padding:100px 32px 160px">
+  <div class="rs-skillgroups" style="margin-bottom:56px">
+    <sc-for list="{{ skillGroups }}" as="g" hint-placeholder-count="2">
+      <div><h3>{{ g.name }}</h3><div class="rs-pills"><sc-for list="{{ g.subs }}" as="t" hint-placeholder-count="3"><span class="rs-pill">{{ t }}</span></sc-for></div></div>
+    </sc-for>
+  </div>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:rgba(236,233,226,.12);border:1px solid rgba(236,233,226,.12)">
   <sc-for list="{{ steps }}" as="s" hint-placeholder-count="4">
     <div style="background:#16181b;padding:36px 28px;display:flex;flex-direction:column;gap:16px;transition:background .4s" style-hover="background:#1f2226">
@@ -122,7 +128,9 @@ class Component extends DCLogic {
       {title:'Pubblicazione',desc:'Copy, hashtag, calendario e gestione community.'},
       {title:'Report',desc:'Metriche chiare ogni mese e ottimizzazione continua.'}
     ];
-    return {stageRef:this.stageRef,cards,steps,R,cw,ch,cw2:cw/2,ch2:ch/2,stageH:ch+48,rot:this.state.rot.toFixed(2),tr:this.state.drag?'none':this.narrow()?'transform .9s cubic-bezier(.65,0,.35,1)':'transform .08s linear',
+    // Sub-skills of this service, grouped by competence (data in skills.js).
+    const skillGroups=window.RS_SKILLS.forService('social').map(c=>({name:c.name,subs:c.subs}));
+    return {stageRef:this.stageRef,skillGroups,cards,steps,R,cw,ch,cw2:cw/2,ch2:ch/2,stageH:ch+48,rot:this.state.rot.toFixed(2),tr:this.state.drag?'none':this.narrow()?'transform .9s cubic-bezier(.65,0,.35,1)':'transform .08s linear',
       onDown:e=>{e.currentTarget.setPointerCapture(e.pointerId);this.sx=e.clientX;this.sr=this.state.rot;this.setState({drag:true});},
       onMove:e=>{ if(this.state.drag){ this.setState({rot:this.sr+(e.clientX-this.sx)*.35}); } else { const r=this.stageRef.current.getBoundingClientRect(); const x=(e.clientX-r.left)/r.width-.5; this.setState({hover:Math.abs(x)>.3?x*1.2:0}); } },
       onUp:()=>this.setState(s=>({drag:false,hover:0,rot:this.narrow()?this.snap(s.rot):s.rot}))};

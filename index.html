@@ -3,10 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./skills.js?v=20261012"></script>
 <script src="./support.js"></script>
-<link rel="stylesheet" href="./motion.css">
-<link rel="stylesheet" href="./responsive.css">
-<script src="./motion.js"></script>
+<link rel="stylesheet" href="./motion.css?v=20261012">
+<link rel="stylesheet" href="./responsive.css?v=20261012">
+<script src="./motion.js?v=20261012"></script>
 </head>
 <body>
 <x-dc>
@@ -91,7 +92,7 @@ a{color:#ece9e2;text-decoration:none}a:hover{color:#4ecdc0}
     <div style="position:absolute;inset:0;background:linear-gradient(180deg,#16181b 0%,rgba(22,24,27,.05) 20%,rgba(22,24,27,.25) 48%,rgba(22,24,27,.82) 72%,#16181b 100%)"></div>
   </div>
   <div class="rs-hud" style="position:absolute;top:120px;left:32px;display:flex;gap:10px;align-items:center"><span class="rs-blink">●</span>AF-C · eye detect</div>
-  <div class="m-about" style="position:relative;max-width:1200px;width:100%;box-sizing:border-box;margin:0 auto;padding:calc(var(--ph) - 280px) 32px 120px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:48px;text-shadow:0 1px 18px rgba(0,0,0,.45)">
+  <div class="m-about" style="position:relative;max-width:1200px;width:100%;box-sizing:border-box;margin:0 auto;padding:calc(var(--ph) - 280px) 32px 24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:48px;text-shadow:0 1px 18px rgba(0,0,0,.45)">
     <div data-reveal="" style="opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)">
       <div data-scramble="" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:#4ecdc0;margin-bottom:20px">About</div>
       <h2 style="margin:0;font-family:'Clash Display',sans-serif;font-weight:800;font-size:clamp(36px,5vw,72px);line-height:.95;letter-spacing:-.03em;text-transform:uppercase">Chi sono?</h2>
@@ -100,11 +101,6 @@ a{color:#ece9e2;text-decoration:none}a:hover{color:#4ecdc0}
       <p style="margin:0;color:rgba(236,233,226,.75)">Sono Riccardo Santini, <span style="color:#4ecdc0">fotografo, videomaker e video editor</span>.</p>
       <p style="margin:0;color:rgba(236,233,226,.75)">Mi occupo di creare contenuti visivi, seguendo le diverse fasi del processo creativo: dall'idea e dalla pianificazione, fino alla produzione e alla post‑produzione. Lavoro con immagini, video e colore, cercando ogni volta il giusto equilibrio tra estetica, tecnica e comunicazione.</p>
       <p style="margin:0;color:rgba(236,233,226,.75)">Che si tratti di realizzare uno shooting fotografico, girare un video o dare nuova forma a materiale già esistente, il mio obiettivo è trasformare ogni progetto in un contenuto curato, coerente e capace di comunicare in modo autentico.</p>
-    </div>
-    <!-- Software and skills from the CV, aligned to the title / bio columns above -->
-    <div data-reveal="" class="m-skills" style="grid-column:1 / -1;opacity:0;transform:translateY(24px);transition:opacity .9s ease .25s,transform .9s cubic-bezier(.2,.7,.2,1) .25s;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:32px 48px;margin-top:56px">
-        <div style="border-top:1px solid rgba(236,233,226,.18);padding-top:18px"><div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#4ecdc0;margin-bottom:14px">Software</div><div style="display:flex;flex-wrap:wrap;gap:8px"><span style="padding:7px 14px;border:1px solid rgba(78,205,192,.45);border-radius:999px;font-size:14px;background:rgba(22,24,27,.55)">Premiere Pro</span><span style="padding:7px 14px;border:1px solid rgba(78,205,192,.45);border-radius:999px;font-size:14px;background:rgba(22,24,27,.55)">After Effects</span><span style="padding:7px 14px;border:1px solid rgba(78,205,192,.45);border-radius:999px;font-size:14px;background:rgba(22,24,27,.55)">DaVinci Resolve</span><span style="padding:7px 14px;border:1px solid rgba(78,205,192,.45);border-radius:999px;font-size:14px;background:rgba(22,24,27,.55)">Photoshop</span><span style="padding:7px 14px;border:1px solid rgba(78,205,192,.45);border-radius:999px;font-size:14px;background:rgba(22,24,27,.55)">Lightroom</span><span style="padding:7px 14px;border:1px solid rgba(78,205,192,.45);border-radius:999px;font-size:14px;background:rgba(22,24,27,.55)">Figma</span></div></div>
-        <div style="border-top:1px solid rgba(236,233,226,.18);padding-top:18px"><div style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#4ecdc0;margin-bottom:14px">Competenze</div><div style="font-size:16px;line-height:1.75">Riprese video<br>Fotografia e post‑produzione<br>Video editing<br>AI content generation</div></div>
     </div>
   </div>
 </section>
@@ -118,10 +114,27 @@ a{color:#ece9e2;text-decoration:none}a:hover{color:#4ecdc0}
         <span style="display:flex;flex-direction:column;gap:8px;transition:transform .4s cubic-bezier(.2,.7,.2,1)" style-hover="transform:translateX(12px)">
           <span style="font-family:'Clash Display',sans-serif;font-weight:800;font-size:clamp(30px,4.5vw,64px);line-height:1;letter-spacing:-.03em;text-transform:uppercase">{{ sv.name }}</span>
           <span style="font-size:14px;color:rgba(236,233,226,.6)">{{ sv.desc }}</span>
+          <span class="rs-pills" style="margin-top:8px"><sc-for list="{{ sv.pills }}" as="pl" hint-placeholder-count="4"><span class="{{ pl.cls }}">{{ pl.text }}</span></sc-for></span>
         </span>
         <span style="width:56px;height:56px;border-radius:999px;border:1px solid rgba(236,233,226,.3);display:grid;place-items:center;font-size:20px;transition:background .4s,color .4s,transform .4s,border-color .4s" style-hover="background:#4ecdc0;border-color:#4ecdc0;color:#16181b;transform:rotate(-45deg)">→</span>
       </a>
     </sc-for>
+  </div>
+</section>
+
+<!-- COMPETENZE: rack-focus list (hover) on the left, wheel-turned lens ring of software on the right; fits one screen (effects in motion.js) -->
+<section id="competenze" data-screen-label="Competenze" class="m-skillsec" style="max-width:1200px;margin:0 auto;padding:24px 32px 80px;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:48px;align-items:center">
+  <div>
+    <div data-scramble="" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:#4ecdc0;margin-bottom:20px">Competenze</div>
+    <ol data-focus="">
+      <sc-for list="{{ competences }}" as="c" hint-placeholder-count="7">
+        <li data-focus-item=""><span class="rs-fnum">{{ c.num }}</span><span class="rs-fname">{{ c.name }}</span><span class="rs-af">◉ AF</span></li>
+      </sc-for>
+    </ol>
+  </div>
+  <div class="m-lenscol" style="display:flex;flex-direction:column;gap:36px">
+    <div data-scramble="" style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:#4ecdc0">Software</div>
+    <div data-lens="{{ softwareList }}" role="img" aria-label="{{ softwareLabel }}"></div>
   </div>
 </section>
 
@@ -219,12 +232,20 @@ class Component extends DCLogic {
   }
   reveal(){ document.querySelectorAll('[data-reveal]').forEach(el=>{ if(el.dataset.shown) return; const r=el.getBoundingClientRect(); if(r.top<innerHeight*.92&&r.bottom>0){ el.dataset.shown='1'; el.style.opacity='1'; el.style.transform='none'; } }); }
   componentWillUnmount(){ removeEventListener('hashchange',this.onHash); removeEventListener('resize',this.onResize); this.io&&this.io.disconnect(); removeEventListener('scroll',this.onScroll); removeEventListener('resize',this.onScroll); }
+  // Home shows a taste of each service's sub-skills: the first four plus a "+N" pill for the rest.
+  servicePills(subs){
+    const pills=subs.slice(0,4).map(text=>({text,cls:'rs-pill'}));
+    if(subs.length>4) pills.push({text:'+'+(subs.length-4),cls:'rs-pill is-more'});
+    return pills;
+  }
   renderVals(){
+    const S=window.RS_SKILLS;
     const services=[
-      {name:'Fotografia',desc:'Eventi, reportage e viaggi.',href:'Fotografia.dc.html'},
-      {name:'Video',desc:'Riprese, montaggio, color correction e sound design.',href:'Video.dc.html'},
-      {name:'Social media',desc:'Contenuti, reel e gestione dei canali.',href:'Social.dc.html'}
-    ];
+      {key:'fotografia',name:'Fotografia',desc:'Eventi, reportage e viaggi.',href:'Fotografia.dc.html'},
+      {key:'video',name:'Video',desc:'Riprese, montaggio, color correction e sound design.',href:'Video.dc.html'},
+      {key:'social',name:'Social media',desc:'Contenuti, reel e gestione dei canali.',href:'Social.dc.html'}
+    ].map(sv=>({...sv,pills:this.servicePills(S.subsOf(sv.key))}));
+    const competences=S.competences.map((c,i)=>({name:c.name,num:String(i+1).padStart(2,'0')}));
     const v=n=>({video:'assets/videos/'+n+'.mp4',poster:'assets/posters/'+n+'.jpg'}), full=undefined, one=undefined;
     const projects=[
       {name:'Blinkoo',role:'Social media manager',cat:'Social media',year:'2024 — 2025',desc:'Gestione dei canali, produzione di reel e foto prodotto, pianificazione editoriale mensile.',items:[{label:'reel · app',ar:'9/16',span:one,...v('reel-uploads')},{label:'reel · thefork awards',ar:'9/16',span:one,...v('reel-theforkawards')},{label:'reel · milano gratis',ar:'9/16',span:one,...v('reel-milanogratis')}]},
@@ -234,7 +255,8 @@ class Component extends DCLogic {
     const words=['Fotografia','Video','Editing','Social media','Eventi','Viaggi'], marquee=words.concat(words);
     // Each list is doubled so the carousel can loop seamlessly; copies stay hidden unless it moves.
     projects.forEach(p=>{ p.items=p.items.concat(p.items.map(it=>({...it,dup:'1'}))); });
-    return {rootRef:this.rootRef,services,projects,marquee};
+    return {rootRef:this.rootRef,services,projects,marquee,competences,
+      softwareList:S.software.join(','),softwareLabel:'Software: '+S.software.join(', ')};
   }
 }
 </script>

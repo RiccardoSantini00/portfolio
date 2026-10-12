@@ -34,10 +34,19 @@
   #about .rs-hud { top: 92px !important; left: 20px !important; }
   #about > div[style*="right:32px"] { top: 92px !important; right: 20px !important; }
   #about { --ph: 78vh !important; }
-  .m-about { grid-template-columns: 1fr !important; gap: 20px !important; padding: calc(var(--ph) - 190px) 20px 64px !important; }
-  .m-skills { grid-template-columns: minmax(0,1fr) minmax(0,1fr) !important; gap: 16px !important; margin-top: 24px !important; }
-  .m-skills span { font-size: 12px !important; padding: 6px 10px !important; white-space: nowrap; }
-  .m-skills > div:last-child > div:last-child { font-size: 14px !important; line-height: 1.6 !important; }
+  .m-about { grid-template-columns: 1fr !important; gap: 20px !important; padding: calc(var(--ph) - 190px) 20px 24px !important; }
+
+  /* ---------- Home: competenze (focus list, then a smaller lens ring) ---------- */
+  .m-skillsec { grid-template-columns: 1fr !important; gap: 56px !important; padding: 34px 16px 30px !important; }
+  .m-lenscol { gap: 28px !important; }
+  [data-focus-item] { grid-template-columns: 2.4em minmax(0,1fr) !important; gap: 10px !important; padding: 14px 12px !important; }
+  [data-focus-item] .rs-fname { font-size: 6.4vw !important; }
+  [data-focus-item] .rs-af { display: none; }
+  .rs-lens { width: min(100%, 330px) !important; }
+  .rs-lens-name { font-size: 11px !important; padding: 5px 9px !important; }
+  .rs-lens-readout b { font-size: 15px !important; }
+  .rs-skillgroups { grid-template-columns: 1fr !important; gap: 22px !important; }
+  section[data-screen-label="Competenze video"] { padding: 56px 16px 0 !important; }
 
   /* ---------- Home: services ---------- */
   #servizi { padding-top: 90px !important; padding-bottom: 80px !important; }

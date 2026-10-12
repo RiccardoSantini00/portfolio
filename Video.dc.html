@@ -3,10 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./skills.js?v=20261012"></script>
 <script src="./support.js"></script>
-<link rel="stylesheet" href="./motion.css">
-<link rel="stylesheet" href="./responsive.css">
-<script src="./motion.js"></script>
+<link rel="stylesheet" href="./motion.css?v=20261012">
+<link rel="stylesheet" href="./responsive.css?v=20261012">
+<script src="./motion.js?v=20261012"></script>
 </head>
 <body>
 <x-dc>
@@ -33,10 +34,7 @@ a{color:#ece9e2;text-decoration:none}a:hover{color:#4ecdc0}
 </nav>
 
 <header data-screen-label="Video hero" style="position:relative;height:100vh;min-height:640px;display:grid;place-items:center;overflow:hidden">
-  <div class="m-frame" style="position:absolute;inset:6vh 32px;border-radius:6px;overflow:hidden;background:repeating-linear-gradient(135deg,#272b30 0 12px,#20242a 12px 24px)">
-    <video data-auto="" src="assets/videos/showreel.mp4" poster="assets/posters/showreel.jpg" preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block"></video>
-  </div>
-  <div class="m-frame" style="position:absolute;inset:6vh 32px;border-radius:6px;background:linear-gradient(180deg,rgba(22,24,27,.45),rgba(22,24,27,.85))"></div>
+  <div class="m-frame" style="position:absolute;inset:6vh 32px;border-radius:6px;background:radial-gradient(ellipse 60% 55% at 50% 45%,#1e2226 0%,#16181b 75%)"></div>
   <div class="rs-corners" style="inset:calc(6vh + 16px) 48px"></div>
   <div class="rs-cross"></div>
   <div class="rs-hud m-vhud" style="position:absolute;top:calc(6vh + 28px);left:72px;right:72px;display:flex;justify-content:space-between;align-items:center"><span style="display:flex;gap:10px;align-items:center"><span class="rs-blink" style="width:8px;height:8px;border-radius:50%;background:#4ecdc0;box-shadow:0 0 12px #4ecdc0"></span>Rec <span data-timecode="" style="color:#ece9e2;letter-spacing:.12em"></span></span><span class="m-hide" style="color:rgba(236,233,226,.6)">showreel · 00:50</span></div>
@@ -47,6 +45,14 @@ a{color:#ece9e2;text-decoration:none}a:hover{color:#4ecdc0}
     <div style="font-family:'JetBrains Mono',monospace;font-size:11px;opacity:.5">guarda lo showreel con audio</div>
   </div>
 </header>
+
+<section data-screen-label="Competenze video" style="max-width:1400px;margin:0 auto;padding:100px 32px 0">
+  <div class="rs-skillgroups">
+    <sc-for list="{{ skillGroups }}" as="g" hint-placeholder-count="2">
+      <div><h3>{{ g.name }}</h3><div class="rs-pills"><sc-for list="{{ g.subs }}" as="t" hint-placeholder-count="3"><span class="rs-pill">{{ t }}</span></sc-for></div></div>
+    </sc-for>
+  </div>
+</section>
 
 <section data-screen-label="Video sparsi" class="m-clips" style="position:relative;max-width:1400px;margin:0 auto;padding:120px 32px 160px;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:24px;align-items:start">
   <sc-for list="{{ clips }}" as="c" hint-placeholder-count="5">
@@ -145,7 +151,9 @@ class Component extends DCLogic {
       {...vid('reel-theforkawards'),title:'Blinkoo — Reel',kind:'color + sound',dur:'00:44',desc:'Grade caldo coerente con il brand, sound design dei cut.',bars:[2,1,3,1,2,2,1,3,2,1,2,1]},
       {...vid('videocreators'),title:'Improove — Brand film',kind:'montaggio',dur:'01:23',desc:'Montaggio, grafiche e sound design per il lancio del prodotto.',bars:[1,3,2,2,1,3,1,2,2,1,3,2]}
     ].map(w=>({...w,open:show(w.src),bars:w.bars.map(n=>({w:n*8+'%'}))}));
-    return {rootRef:this.rootRef,clips,works,player:this.state.player,yes:true,
+    // Sub-skills of this service, grouped by competence (data in skills.js).
+    const skillGroups=window.RS_SKILLS.forService('video').map(c=>({name:c.name,subs:c.subs}));
+    return {rootRef:this.rootRef,skillGroups,clips,works,player:this.state.player,yes:true,
       playReel:show('assets/videos/showreel.mp4'),
       close:()=>this.setState({player:null}), stop:e=>e.stopPropagation()};
   }

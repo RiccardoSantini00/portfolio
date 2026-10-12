@@ -14,6 +14,11 @@
     data-badge="TEXT"    empty element becomes a spinning circular text badge
     data-iris            empty element becomes a 3D camera aperture driven by scroll
     data-wave="N"        empty element becomes an animated N-bar waveform
+    data-focus           list whose [data-focus-item] children sit slightly blurred and
+                         snap into focus on hover (tap on touch screens): rack focus
+    data-lens="a,b,c"    empty element becomes a lens focus ring turned by the wheel
+                         (page stays still) or a sideways drag; names stay upright and
+                         the one under the top index lights up
 
   Global extras: page-transition curtain, scroll progress bar, film grain, cursor,
   and a mail chooser — every mailto: link opens a panel to pick Gmail, Outlook,
@@ -249,6 +254,95 @@
   /* 3D aperture: each blade's straight edge is tangent to an inner circle of radius `a`,
      so the 8 blades leave a regular octagon open. Scrolling grows/shrinks `a`. */
   const bladePath = a => 'M' + a + ' -34 L260 -34 L260 260 L' + a + ' 260 Z';
+  /* ---------- Rack focus list ---------- */
+  // Mouse: CSS :hover does the focusing. Touch has no hover, so a tap puts that item in focus (data-on).
+  function focusList(node) {
+    node.addEventListener('pointerup', e => {
+      if (e.pointerType === 'mouse') return;
+      const hit = e.target.closest('[data-focus-item]');
+      node.querySelectorAll('[data-focus-item]').forEach(it => it.toggleAttribute('data-on', it === hit));
+    });
+  }
+
+  /* ---------- Lens focus ring ---------- */
+  // Turned by the wheel while the pointer is over it (the page stays still) or by a sideways drag;
+  // it eases toward the target angle and snaps so one name sits under the top index.
+  function lens(node) {
+    const names = node.dataset.lens.split(',').map(s => s.trim()).filter(Boolean);
+    node.classList.add('rs-lens');
+    node.innerHTML = lensMarkup(names.length);
+    node.querySelectorAll('.rs-lens-name').forEach((lb, i) => { lb.textContent = names[i]; });
+    node.querySelector('.rs-lens-hint').textContent = fine ? '↻ scorri sulla ghiera' : '↔ trascina per ruotare';
+    const step = 360 / names.length, draw = lensDrawer(node, names, step);
+    const state = { rot: 0, target: 0, stop: 0, moving: false, snapTimer: 0 };
+    const turnTo = deg => { state.target = deg; if (!state.moving) { state.moving = true; requestAnimationFrame(follow); } };
+    // A small nudge (one wheel notch is ~25°) already moves to the next name in that direction.
+    const snap = () => {
+      const moved = state.target - state.stop, notches = Math.abs(moved) < step * .15 ? 0 : Math.max(1, Math.round(Math.abs(moved) / step));
+      state.stop += Math.sign(moved) * notches * step;
+      turnTo(state.stop);
+    };
+    const snapSoon = () => { clearTimeout(state.snapTimer); state.snapTimer = setTimeout(snap, 160); };
+    const follow = () => {
+      state.rot = lerp(state.rot, state.target, .16); draw(state.rot);
+      if (Math.abs(state.target - state.rot) > .05) requestAnimationFrame(follow); else { state.rot = state.target; draw(state.rot); state.moving = false; }
+    };
+    wireLensWheel(node, by => { turnTo(state.target + by); snapSoon(); });
+    wireLensDrag(node, by => { turnTo(state.target + by); }, snapSoon);
+    draw(0);
+  }
+
+  // Returns draw(rot): spins the tick scale, keeps names upright around the ring, lights the one at the top.
+  function lensDrawer(node, names, step) {
+    const ring = node.querySelector('.rs-lens-scale'), labels = [...node.querySelectorAll('.rs-lens-name')];
+    const readout = node.querySelector('.rs-lens-readout b');
+    return rot => {
+      ring.style.transform = 'rotate(' + rot.toFixed(2) + 'deg)';
+      let active = 0, bestGap = 360;
+      labels.forEach((lb, i) => {
+        const deg = i * step + rot, rad = (deg - 90) * Math.PI / 180;
+        lb.style.left = (50 + 40 * Math.cos(rad)).toFixed(2) + '%';
+        lb.style.top = (50 + 40 * Math.sin(rad)).toFixed(2) + '%';
+        const gap = Math.abs(((deg % 360) + 540) % 360 - 180); // distance from the top index, in degrees
+        if (gap < bestGap) { bestGap = gap; active = i; }
+      });
+      labels.forEach((lb, i) => lb.toggleAttribute('data-on', i === active));
+      if (readout.textContent !== names[active]) readout.textContent = names[active];
+    };
+  }
+
+  // Wheel over the ring turns it instead of scrolling the page (passive:false so preventDefault works).
+  function wireLensWheel(node, turnBy) {
+    node.addEventListener('wheel', e => {
+      e.preventDefault();
+      const px = e.deltaMode === 1 ? e.deltaY * 16 : e.deltaY;
+      turnBy(-px * .25);
+    }, { passive: false });
+  }
+
+  // Horizontal drag turns the ring; vertical finger moves still scroll the page (touch-action: pan-y in CSS).
+  function wireLensDrag(node, turnBy, onEnd) {
+    let lastX = null;
+    node.addEventListener('pointerdown', e => { lastX = e.clientX; node.setPointerCapture(e.pointerId); node.classList.add('is-turning'); });
+    node.addEventListener('pointermove', e => { if (lastX === null) return; turnBy((e.clientX - lastX) * .6); lastX = e.clientX; });
+    const end = () => { if (lastX === null) return; lastX = null; node.classList.remove('is-turning'); onEnd(); };
+    node.addEventListener('pointerup', end); node.addEventListener('pointercancel', end);
+  }
+
+  function lensMarkup(count) {
+    let ticks = '';
+    for (let i = 0; i < 72; i++) {
+      const long = i % 6 === 0;
+      ticks += '<line x1="200" y1="' + (long ? 14 : 20) + '" x2="200" y2="30" transform="rotate(' + i * 5 + ' 200 200)"' + (long ? ' class="is-long"' : '') + '/>';
+    }
+    return '<svg class="rs-lens-scale" viewBox="0 0 400 400" aria-hidden="true">' +
+        '<circle cx="200" cy="200" r="196"/><circle cx="200" cy="200" r="150" class="is-inner"/>' + ticks + '</svg>' +
+      '<span class="rs-lens-index" aria-hidden="true"></span>' +
+      '<div class="rs-lens-core"><span class="rs-lens-readout"><i>▲ in uso</i><b></b></span></div>' +
+      '<ul class="rs-lens-names">' + '<li class="rs-lens-name"></li>'.repeat(count) + '</ul>' +
+      '<span class="rs-lens-hint"></span>';
+  }
+
   function iris(node) {
     const N = 8, R = 90;
     let blades = '';
@@ -280,7 +374,7 @@
   const EFFECTS = [
     ['[data-tilt]', tilt, true], ['[data-magnetic]', magnetic, true], ['[data-preview]', preview, false],
     ['[data-scramble]', scramble, false], ['[data-timecode]', timecode, false], ['[data-badge]', badge, false],
-    ['[data-iris]', iris, false], ['[data-wave]', wave, false]
+    ['[data-iris]', iris, false], ['[data-wave]', wave, false], ['[data-focus]', focusList, false], ['[data-lens]', lens, false]
   ];
   // Nodes still inside <x-dc> are the raw template the runtime has yet to read:
   // touching them would leak injected markup into React's own render.

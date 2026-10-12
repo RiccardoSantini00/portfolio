@@ -3,10 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./skills.js?v=20261012"></script>
 <script src="./support.js"></script>
-<link rel="stylesheet" href="./motion.css">
-<link rel="stylesheet" href="./responsive.css">
-<script src="./motion.js"></script>
+<link rel="stylesheet" href="./motion.css?v=20261012">
+<link rel="stylesheet" href="./responsive.css?v=20261012">
+<script src="./motion.js?v=20261012"></script>
 </head>
 <body>
 <x-dc>
@@ -36,6 +37,11 @@ a{color:#ece9e2;text-decoration:none}a:hover{color:#4ecdc0}
     <h1 style="margin:0;font-family:'Clash Display',sans-serif;font-weight:800;font-size:clamp(36px,7.6vw,150px);line-height:.9;letter-spacing:-.04em;text-transform:uppercase;white-space:nowrap">Fotografia</h1>
   </div>
   <p style="margin:0;font-size:17px;line-height:1.6;color:rgba(236,233,226,.78);max-width:52ch">Eventi e viaggi. Passa il mouse sulle immagini: ogni scatto porta con sé il suo contesto.</p>
+  <div class="rs-skillgroups" style="margin-top:12px">
+    <sc-for list="{{ skillGroups }}" as="g" hint-placeholder-count="2">
+      <div><h3>{{ g.name }}</h3><div class="rs-pills"><sc-for list="{{ g.subs }}" as="t" hint-placeholder-count="3"><span class="rs-pill">{{ t }}</span></sc-for></div></div>
+    </sc-for>
+  </div>
 </header>
 
 <div data-screen-label="Filtri" style="max-width:1400px;margin:0 auto;padding:0 32px 40px;display:flex;gap:10px;flex-wrap:wrap">
@@ -118,7 +124,9 @@ class Component extends DCLogic {
     const cur=this.state.cat;
     const cats=['Tutto','Eventi','Viaggi'].map(c=>({label:c,bg:c===cur?'#4ecdc0':'transparent',fg:c===cur?'#16181b':'#ece9e2',pick:()=>this.setState({cat:c})}));
     const photos=all.map(p=>{const on=cur==='Tutto'||p.cat===cur;return {...p,disp:on?'block':'none'};});
-    return {cats,photos,cmpRef:this.cmpRef,pct:this.state.p+'%',clip:'inset(0 '+(100-this.state.p)+'% 0 0)',clipPre:'inset(0 0 0 '+this.state.p+'%)',
+    // Sub-skills of this service, grouped by competence (data in skills.js).
+    const skillGroups=window.RS_SKILLS.forService('fotografia').map(c=>({name:c.name,subs:c.subs}));
+    return {skillGroups,cats,photos,cmpRef:this.cmpRef,pct:this.state.p+'%',clip:'inset(0 '+(100-this.state.p)+'% 0 0)',clipPre:'inset(0 0 0 '+this.state.p+'%)',
       onDown:e=>{if(e.pointerType!=='mouse'&&!e.target.closest('[data-handle]'))return;e.currentTarget.setPointerCapture(e.pointerId);this.setState({drag:true});this.set(e);},
       onMoveP:e=>{if(this.state.drag)this.set(e);},
       onUp:()=>this.setState({drag:false})};

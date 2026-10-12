@@ -132,6 +132,7 @@
 ├── motion.css
 ├── motion.js
 ├── responsive.css
+├── skills.js
 ├── staticwebapp.config.json
 ├── support.js
 └── tree.md
