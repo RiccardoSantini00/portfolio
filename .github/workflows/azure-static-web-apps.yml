@@ -22,7 +22,7 @@ jobs:
       - name: Controlla che le pagine ci siano
         run: |
           for f in index.html Fotografia.dc.html Video.dc.html \
-                   Editing.dc.html Social.dc.html staticwebapp.config.json; do
+                   Progetti.dc.html Social.dc.html staticwebapp.config.json; do
             [ -f "$f" ] || { echo "::error::manca $f"; exit 1; }
           done
           echo "Peso totale: $(du -sh --exclude=.git . | cut -f1)"
